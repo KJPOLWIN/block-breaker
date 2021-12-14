@@ -19,11 +19,11 @@ MNGR = ./src/managers/
 UTIL = ./src/util/
 
 # Project title (executable name)
-TITLE = Project_name
+TITLE = Block_breaker
 
 OBJ = main.o game.o animatedsprite.o hitbox.o ray.o zoomableview.o button.o \
 			checkbox.o guibar.o guitext.o nextstatebutton.o radiobutton.o \
-			radiobuttonarray.o scrollbar.o mainmenu.o resourcemanager.o \
+			radiobuttonarray.o scrollbar.o mainmenu.o game_state.o resourcemanager.o \
 			settingsmanager.o viewmanager.o
 
 # Output rules
@@ -48,12 +48,12 @@ linux_clear:
 
 # Main classes
 main.o: $(SRC)main.cpp $(SRC)game.h
-	g++ -c $(SRC)main.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) -I$(SRC)
+	g++ -c $(SRC)main.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) -I$(SRC) -I$(GUI) -I$(GMST) -I$(UTIL) -I$(MNGR)
 
 game.o: $(SRC)game.cpp $(SRC)game.h $(GUI)guitext.h $(SRC)constants.h \
 				$(SRC)gamestate.h $(GMST)mainmenu.h
 	g++ -c $(SRC)game.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(SRC) $(GUI) $(GMST)
+			-I$(SRC) -I$(GUI) -I$(GMST) -I$(UTIL) -I$(MNGR)
 
 
 # Util classes
@@ -65,24 +65,24 @@ hitbox.o: $(UTIL)hitbox.cpp $(UTIL)hitbox.h
 	g++ -c $(UTIL)hitbox.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) -I$(UTIL)
 
 ray.o: $(UTIL)ray.cpp $(UTIL)ray.h $(SRC)constants.h $(UTIL)hitbox.h
-	g++ -c $(UTIL)ray.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) -I$(UTIL) $(SRC)
+	g++ -c $(UTIL)ray.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) -I$(UTIL) -I$(SRC)
 
 zoomableview.o: $(UTIL)zoomableview.cpp $(UTIL)zoomableview.h $(SRC)constants.h \
 								$(MNGR)settingsmanager.h
 	g++ -c $(UTIL)zoomableview.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(UTIL) $(SRC) $(MNGR)
+			-I$(UTIL) -I$(SRC) -I$(MNGR)
 
 
 # GUI classes
 button.o: $(GUI)button.cpp $(GUI)button.h $(UTIL)animatedsprite.h \
 					$(GUI)guitext.h
 	g++ -c $(GUI)button.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(GUI) $(UTIL)
+			-I$(GUI) -I$(UTIL)
 
 checkbox.o: $(GUI)checkbox.cpp $(GUI)checkbox.h $(UTIL)animatedsprite.h \
 						$(GUI)guitext.h
 	g++ -c $(GUI)checkbox.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(GUI) $(UTIL)
+			-I$(GUI) -I$(UTIL)
 
 guibar.o: $(GUI)guibar.cpp $(GUI)guibar.h
 	g++ -c $(GUI)guibar.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) -I$(GUI)
@@ -93,21 +93,21 @@ guitext.o: $(GUI)guitext.cpp $(GUI)guitext.h
 nextstatebutton.o: $(GUI)nextstatebutton.cpp $(GUI)nextstatebutton.h \
 									 $(UTIL)animatedsprite.h $(GUI)guitext.h $(SRC)gamestate.h
 	g++ -c $(GUI)nextstatebutton.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(GUI) $(UTIL) $(SRC)
+			-I$(GUI) -I$(UTIL) -I$(SRC)
 
 radiobutton.o: $(GUI)radiobutton.cpp $(GUI)radiobutton.h $(UTIL)animatedsprite.h \
 							 $(GUI)guitext.h
 	g++ -c $(GUI)radiobutton.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(GUI) $(UTIL)
+			-I$(GUI) -I$(UTIL)
 
 radiobuttonarray.o: $(GUI)radiobuttonarray.cpp $(GUI)radiobuttonarray.h \
 										$(GUI)radiobutton.h
 	g++ -c $(GUI)radiobuttonarray.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(GUI)
+			-I$(GUI) -I$(UTIL)
 
 scrollbar.o: $(GUI)scrollbar.cpp $(GUI)scrollbar.h $(UTIL)animatedsprite.h
 	g++ -c $(GUI)scrollbar.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(GUI) $(UTIL)
+			-I$(GUI) -I$(UTIL)
 
 
 # Gamestate classes
@@ -115,21 +115,25 @@ mainmenu.o: $(GMST)mainmenu.cpp $(GMST)mainmenu.h $(GUI)guitext.h \
 						$(SRC)gamestate.h $(MNGR)resourcemanager.h $(SRC)constants.h \
 						$(MNGR)settingsmanager.h $(GUI)nextstatebutton.h
 	g++ -c $(GMST)mainmenu.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(GMST) $(GUI) $(SRC) $(MNGR)
+			-I$(GMST) -I$(GUI) -I$(SRC) -I$(MNGR) -I$(UTIL)
+
+game_state.o: $(GMST)game_state.cpp $(GMST)game_state.h
+	g++ -c $(GMST)game_state.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
+			-I$(GMST) -I$(GUI) -I$(SRC) -I$(MNGR) -I$(UTIL)
 
 
 # Manager classes
 resourcemanager.o: $(MNGR)resourcemanager.cpp $(MNGR)resourcemanager.h \
 									 $(UTIL)animatedsprite.h
 	g++ -c $(MNGR)resourcemanager.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(MNGR) $(UTIL)
+			-I$(MNGR) -I$(UTIL)
 
 settingsmanager.o: $(MNGR)settingsmanager.cpp $(MNGR)settingsmanager.h \
 									 $(UTIL)keyboardcontrols.h
 	g++ -c $(MNGR)settingsmanager.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(MNGR) $(UTIL)
+			-I$(MNGR) -I$(UTIL)
 
 viewmanager.o: $(MNGR)viewmanager.cpp $(MNGR)viewmanager.h $(UTIL)zoomableview.h \
 							 $(SRC)constants.h
 	g++ -c $(MNGR)viewmanager.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(MNGR) $(UTIL) $(SRC)
+			-I$(MNGR) -I$(UTIL) -I$(SRC)

@@ -6,10 +6,10 @@
 	namespace constant
 	{
 		//Window consts (you can change these)
-		inline constexpr int windowWidth{ 1920 };
-		inline constexpr int windowHeight{ 1080 };
-		inline constexpr sf::Style windowStyle{ sf::Style::Fullscreen };
-		inline constexpr sf::Color fpsCounterColor{ stf::Color::Red };
+		inline constexpr int windowWidth{ 800 };
+		inline constexpr int windowHeight{ 1000 };
+		inline constexpr sf::Uint32 windowStyle{ sf::Style::Default };
+		inline const sf::Color fpsCounterColor{ sf::Color::Red };
 
 		//Mathematical consts (don't touch these)
 		inline constexpr double degToRad{ 0.0174532925 };

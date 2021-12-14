@@ -16,18 +16,15 @@
 			void run(double& elapsedTime, sf::Vector2i& mousePosition, bool& canClick, guiText& fpsCounter, sf::RenderWindow& window, GameState& gamestate);
 
 		private:
-			//Background sprite
-			AnimatedSprite background{ ResourceManager::/*Menu background sprite*/ };
-
 			//Buttons
-			NextStateButton startButton{ ResourceManager::/*button spirte*/,
-										 							 sf::Vector2f(/*size*/),
-										 						 	 ResourceManager::/*font*/,
-										 							 "TEXT",
-										 						 	 sf::Color::/*text color*/,
-										 						 	 /*text size*/,
-										 						 	 sf::Vector2f(/*text offset*/),
-										 						 	 GameState::/*next gamestate*/ };
+			NextStateButton startButton{ ResourceManager::startButton,
+										 							 sf::Vector2f(200, 200),
+										 						 	 ResourceManager::arial,
+										 							 "",
+										 						 	 sf::Color::White,
+										 						 	 0,
+										 						 	 sf::Vector2f(0, 0),
+										 						 	 GameState::Game };
 
 	};
 

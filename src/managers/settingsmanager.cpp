@@ -2,7 +2,7 @@
 #include "keyboardcontrols.h"
 #include <SFML/Graphics.hpp>
 
-bool 	   	 	 SettingsManager::showFPSCounter { false };
+bool 	   	 	 SettingsManager::showFPSCounter { true };
 bool 		 	 	 SettingsManager::enableVSync	   { true };
 int 				 SettingsManager::fpsLimit 			 { 0 };
 // KeyboardControls SettingsManager::keyboardControls{ sf::Keyboard::W,
@@ -10,3 +10,4 @@ int 				 SettingsManager::fpsLimit 			 { 0 };
 // 																										sf::Keyboard::D,
 // 																										sf::Keyboard::A,
 // 																										sf::Keyboard::Escape };
+int SettingsManager::zoomingSpeed{ 1 };

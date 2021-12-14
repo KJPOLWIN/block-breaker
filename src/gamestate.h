@@ -4,6 +4,8 @@
 	enum class GameState
 	{
 		MainMenu,
+		Game,
+		Exit
 		//Add ganestates here
 	};
 

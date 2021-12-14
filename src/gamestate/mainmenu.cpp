@@ -8,10 +8,7 @@
 
 MainMenu::MainMenu()
 {
-	startButton.setPosition(sf::Vector2f(/*position*/));
-
-	background.setPosition(sf::Vector2f(constant::windowWidth * 0.5,
-																			constant::windowHeight * 0.5));
+	startButton.setPosition(sf::Vector2f(400, 600));
 }
 
 void MainMenu::run(double& elapsedTime, sf::Vector2i& mousePosition, bool& canClick, guiText& fpsCounter, sf::RenderWindow& window, GameState& gamestate)
@@ -28,15 +25,13 @@ void MainMenu::run(double& elapsedTime, sf::Vector2i& mousePosition, bool& canCl
 	}
 
 	//Updating everything
-	background.update(elapsedTime);
 	startButton.update(elapsedTime);
 
 	fpsCounter.update(std::to_string(static_cast<int>(1 / elapsedTime)));
 
 	//Drawing everything
-	window.clear();
+	window.clear(sf::Color::Black);
 
-	background.draw(&window);
 	startButton.draw(&window);
 
 	if(SettingsManager::showFPSCounter)

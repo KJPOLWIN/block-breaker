@@ -5,6 +5,7 @@
 	#include "constants.h"
 	#include "gamestate.h"
 	#include "mainmenu.h"
+	#include "game_state.h"
 	#include <SFML/Graphics.hpp>
 
 	class Game
@@ -27,12 +28,11 @@
 			GameState gamestate{ GameState::MainMenu };
 
 			MainMenu mainMenu;			//Note: game states aren't initialized here,
-															//	  	because they must be initialized
+			Game_state game_state;	//	  	because they must be initialized
 															//  		AFTER resources are loaded
-			//add new gamestates here
 
 			//FPS counter
-			guiText fpsCounter{ /*Font*/,
+			guiText fpsCounter{ ResourceManager::arial,
 													"",
 													constant::fpsCounterColor,
 													50,

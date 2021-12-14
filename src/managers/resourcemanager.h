@@ -10,14 +10,14 @@
 			static void load();
 
 			//FONTS
-			//static sf::Font ;
+			static sf::Font arial;
 
 			//TEXTURES
 			//	Empty texture
-			static sf::Texture nothingnessTexture;
+			//static sf::Texture nothingnessTexture;
 
 			//	Buttons
-			//static sf::Texture ;
+			static sf::Texture startButtonTexture;
 
 			//	GUI
 
@@ -26,10 +26,10 @@
 
 			//SPRITES
 			//	Empty sprite
-			static AnimatedSprite nothingness;
+			//static AnimatedSprite nothingness;
 
 			//	Buttons
-			//static AnimatedSprite ;
+			static AnimatedSprite startButton;
 
 			//	GUI
 

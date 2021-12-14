@@ -4,20 +4,20 @@
 
 void ResourceManager::load()
 {
-	//font.loadFromFile("resources/fonts/font.ttf");
+	arial.loadFromFile("resources/fonts/arial.ttf");
 
-	//texture.loadFromFile("resources/textures/texture.png");
+	startButtonTexture.loadFromFile("resources/textures/start.png");
 
-	// sprite 									 = AnimatedSprite{ texture,
-	// 										   											 sf::Vector2f(/*size*/),
-	// 										   											 1 /*frame count*/,
-	// 										   											 1.0 /*frame duration*/};
+	startButton	= AnimatedSprite{ startButtonTexture,
+											   				sf::Vector2f(200, 200),
+											   				1,
+											   				1.0 };
 }
 
 sf::Font ResourceManager::arial {  };
 
-sf::Texture ResourceManager::nothingnessTexture				 			 {  };
-//sf::Texture	ResourceManager::texture			   		 			 {  };
+//sf::Texture ResourceManager::nothingnessTexture{  };
+sf::Texture	ResourceManager::startButtonTexture	 {  };
 
-AnimatedSprite ResourceManager::nothingness					 					 {  };
-//AnimatedSprite ResourceManager::sprite			   		 			 {  };
+//AnimatedSprite ResourceManager::nothingness{  };
+AnimatedSprite ResourceManager::startButton	 {  };

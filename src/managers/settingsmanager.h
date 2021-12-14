@@ -11,6 +11,8 @@
 			static int fpsLimit;
 			//static KeyboardControls keyboardControls;
 
+			static int zoomingSpeed;
+
 		private:
 			SettingsManager() {  };
 

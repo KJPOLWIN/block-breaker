@@ -3,6 +3,7 @@
 #include "guitext.h"
 #include "gamestate.h"
 #include "viewmanager.h"
+#include "settingsmanager.h"
 #include <SFML/Graphics.hpp>
 
 Game::Game()
@@ -16,7 +17,7 @@ Game::Game()
 
 	//initializing states
 	mainMenu = MainMenu();
-	//initialize here new gamestates
+	game_state = Game_state();
 }
 
 void Game::run()
@@ -43,17 +44,17 @@ void Game::gameLoop()
 		}
 
 		//delete this to disable zoom
-		if(event.type == sf::Event::MouseWheelScrolled)
-		{
-			if(event.mouseWheelScroll.delta > 0)
-			{
-				ViewManager::zoomDirection = -1;
-			}
-			else
-			{
-				ViewManager::zoomDirection = 1;
-			}
-		}
+		// if(event.type == sf::Event::MouseWheelScrolled)
+		// {
+		// 	if(event.mouseWheelScroll.delta > 0)
+		// 	{
+		// 		ViewManager::zoomDirection = -1;
+		// 	}
+		// 	else
+		// 	{
+		// 		ViewManager::zoomDirection = 1;
+		// 	}
+		// }
 	}
 
 	switch(gamestate)
@@ -62,7 +63,9 @@ void Game::gameLoop()
 			mainMenu.run(elapsedTime, mousePosition, canClick, fpsCounter, window, gamestate);
 		break;
 
-		//add cases for new gamestates
+		case GameState::Game:
+			game_state.run(elapsedTime, mousePosition, canClick, fpsCounter, window, gamestate);
+		break;
 
 		case GameState::Exit:
 			window.close();
