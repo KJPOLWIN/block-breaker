@@ -3,8 +3,8 @@
 #include <SFML/Graphics.hpp>
 
 bool 	   	 	 SettingsManager::showFPSCounter { true };
-bool 		 	 	 SettingsManager::enableVSync	   { true };
-int 				 SettingsManager::fpsLimit 			 { 0 };
+bool 		 	 	 SettingsManager::enableVSync	   { false };
+int 				 SettingsManager::fpsLimit 			 { 144 };
 // KeyboardControls SettingsManager::keyboardControls{ sf::Keyboard::W,
 // 																										sf::Keyboard::S,
 // 																										sf::Keyboard::D,

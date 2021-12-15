@@ -25,8 +25,12 @@ void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition, bool& can
 	//Updating everything
   fpsCounter.update(std::to_string(static_cast<int>(1 / elapsedTime)));
 
+	testBall.update(elapsedTime);
+
 	//Drawing everything
 	window.clear(sf::Color::Black);
+
+	testBall.draw(window);
 
 	if(SettingsManager::showFPSCounter)
 	{

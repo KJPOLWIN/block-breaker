@@ -2,9 +2,6 @@
 SFMLINC = path/to/sfml/include
 SFMLLIB = path/to/sfml/lib
 
-# RapidXML path
-RXML = path/to/RapidXML
-
 # Options
 SFML = -lsfml-graphics-s -lsfml-window-s -lsfml-audio-s -lsfml-network-s -lsfml-system-s \
 	   -lfreetype -lopenal32 -lflac -lvorbisenc -lvorbisfile -lvorbis -logg -lws2_32 \
@@ -17,6 +14,7 @@ GMST = ./src/gamestate/
 GUI  = ./src/gui/
 MNGR = ./src/managers/
 UTIL = ./src/util/
+GMOB = ./src/gameobject/
 
 # Project title (executable name)
 TITLE = Block_breaker
@@ -24,7 +22,7 @@ TITLE = Block_breaker
 OBJ = main.o game.o animatedsprite.o hitbox.o ray.o zoomableview.o button.o \
 			checkbox.o guibar.o guitext.o nextstatebutton.o radiobutton.o \
 			radiobuttonarray.o scrollbar.o mainmenu.o game_state.o resourcemanager.o \
-			settingsmanager.o viewmanager.o
+			settingsmanager.o viewmanager.o ball.o
 
 # Output rules
 output: $(OBJ)
@@ -48,12 +46,13 @@ linux_clear:
 
 # Main classes
 main.o: $(SRC)main.cpp $(SRC)game.h
-	g++ -c $(SRC)main.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) -I$(SRC) -I$(GUI) -I$(GMST) -I$(UTIL) -I$(MNGR)
+	g++ -c $(SRC)main.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
+			-I$(SRC) -I$(GUI) -I$(GMST) -I$(UTIL) -I$(MNGR)  -I$(GMOB)
 
 game.o: $(SRC)game.cpp $(SRC)game.h $(GUI)guitext.h $(SRC)constants.h \
 				$(SRC)gamestate.h $(GMST)mainmenu.h
 	g++ -c $(SRC)game.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(SRC) -I$(GUI) -I$(GMST) -I$(UTIL) -I$(MNGR)
+			-I$(SRC) -I$(GUI) -I$(GMST) -I$(UTIL) -I$(MNGR) -I$(GMOB)
 
 
 # Util classes
@@ -117,9 +116,9 @@ mainmenu.o: $(GMST)mainmenu.cpp $(GMST)mainmenu.h $(GUI)guitext.h \
 	g++ -c $(GMST)mainmenu.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMST) -I$(GUI) -I$(SRC) -I$(MNGR) -I$(UTIL)
 
-game_state.o: $(GMST)game_state.cpp $(GMST)game_state.h
+game_state.o: $(GMST)game_state.cpp $(GMST)game_state.h $(GMOB)ball.h
 	g++ -c $(GMST)game_state.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(GMST) -I$(GUI) -I$(SRC) -I$(MNGR) -I$(UTIL)
+			-I$(GMST) -I$(GUI) -I$(SRC) -I$(MNGR) -I$(UTIL) -I$(GMOB)
 
 
 # Manager classes
@@ -137,3 +136,8 @@ viewmanager.o: $(MNGR)viewmanager.cpp $(MNGR)viewmanager.h $(UTIL)zoomableview.h
 							 $(SRC)constants.h
 	g++ -c $(MNGR)viewmanager.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(MNGR) -I$(UTIL) -I$(SRC)
+
+# Game object classes
+ball.o: $(GMOB)ball.cpp $(GMOB)ball.h $(SRC)constants.h
+	g++ -c $(GMOB)ball.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
+			-I$(GMOB) -I$(SRC)
