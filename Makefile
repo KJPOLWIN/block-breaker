@@ -22,7 +22,7 @@ TITLE = Block_breaker
 OBJ = main.o game.o animatedsprite.o hitbox.o ray.o zoomableview.o button.o \
 			checkbox.o guibar.o guitext.o nextstatebutton.o radiobutton.o \
 			radiobuttonarray.o scrollbar.o mainmenu.o game_state.o resourcemanager.o \
-			settingsmanager.o viewmanager.o ball.o
+			settingsmanager.o viewmanager.o ball.o wall.o
 
 # Output rules
 output: $(OBJ)
@@ -140,4 +140,8 @@ viewmanager.o: $(MNGR)viewmanager.cpp $(MNGR)viewmanager.h $(UTIL)zoomableview.h
 # Game object classes
 ball.o: $(GMOB)ball.cpp $(GMOB)ball.h $(SRC)constants.h
 	g++ -c $(GMOB)ball.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
+			-I$(GMOB) -I$(SRC)
+
+wall.o: $(GMOB)wall.cpp $(GMOB)wall.h $(GMOB)ball.h $(SRC)constants.h
+	g++ -c $(GMOB)wall.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMOB) -I$(SRC)

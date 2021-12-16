@@ -13,6 +13,9 @@
 
       void bounce(sf::Vector2i hitDirection);
 
+      sf::Vector2f getPosition();
+      sf::FloatRect getGlobalBounds();
+
     private:
       sf::Vector2f position{ 0, 0 };
       sf::Vector2f velocity{ 0, 1.0f };

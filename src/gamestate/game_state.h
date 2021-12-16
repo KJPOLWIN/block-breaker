@@ -4,7 +4,9 @@
 	#include "guitext.h"
 	#include "gamestate.h"
 	#include "ball.h"
+	#include "wall.h"
 	#include <SFML/Graphics.hpp>
+	#include <vector>
 
 	class Game_state
 	{
@@ -14,7 +16,8 @@
 			void run(double& elapsedTime, sf::Vector2i& mousePosition, bool& canClick, guiText& fpsCounter, sf::RenderWindow& window, GameState& gamestate);
 
 		private:
-			Ball testBall{ sf::Vector2f(400, 500), 50.0, sf::Vector2f(0.0f, -1.0f) };
+			Ball testBall{ sf::Vector2f(400, 500), 100.0, sf::Vector2f(-1.0f, -1.0f) };
+			std::vector<Wall> walls;
 	};
 
 #endif

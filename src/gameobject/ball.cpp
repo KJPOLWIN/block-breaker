@@ -7,7 +7,7 @@ Ball::Ball(sf::Vector2f initialPosition, double speed, sf::Vector2f direction)
     velocity{ direction.x * speed, direction.y * speed }
 {
   ball.setFillColor(constant::ballColor);
-  ball.setOrigin(constant::ballRadius * 0.5, constant::ballRadius * 0.5);
+  ball.setOrigin(constant::ballRadius, constant::ballRadius);
 }
 
 void Ball::update(double elapsedTime)
@@ -25,5 +25,22 @@ void Ball::draw(sf::RenderWindow& targetWindow)
 
 void Ball::bounce(sf::Vector2i hitDirection)
 {
+  if(hitDirection.y == 0)
+  {
+    velocity.x = -velocity.x;
+  }
+  else if(hitDirection.x == 0)
+  {
+    velocity.y = -velocity.y;
+  }
+}
 
+sf::Vector2f Ball::getPosition()
+{
+  return position;
+}
+
+sf::FloatRect Ball::getGlobalBounds()
+{
+  return ball.getGlobalBounds();
 }
