@@ -22,7 +22,7 @@ TITLE = Block_breaker
 OBJ = main.o game.o animatedsprite.o hitbox.o ray.o zoomableview.o button.o \
 			checkbox.o guibar.o guitext.o nextstatebutton.o radiobutton.o \
 			radiobuttonarray.o scrollbar.o mainmenu.o game_state.o resourcemanager.o \
-			settingsmanager.o viewmanager.o ball.o wall.o
+			settingsmanager.o viewmanager.o ball.o wall.o balldeletor.o ballgenerator.o
 
 # Output rules
 output: $(OBJ)
@@ -144,4 +144,12 @@ ball.o: $(GMOB)ball.cpp $(GMOB)ball.h $(SRC)constants.h
 
 wall.o: $(GMOB)wall.cpp $(GMOB)wall.h $(GMOB)ball.h $(SRC)constants.h
 	g++ -c $(GMOB)wall.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
+			-I$(GMOB) -I$(SRC)
+
+balldeletor.o: $(GMOB)balldeletor.cpp $(GMOB)balldeletor.h $(GMOB)ball.h $(SRC)constants.h
+	g++ -c $(GMOB)balldeletor.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
+			-I$(GMOB) -I$(SRC)
+
+ballgenerator.o: $(GMOB)ballgenerator.cpp $(GMOB)ballgenerator.h $(GMOB)ball.h $(SRC)constants.h
+	g++ -c $(GMOB)ballgenerator.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMOB) -I$(SRC)

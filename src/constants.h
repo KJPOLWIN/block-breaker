@@ -14,7 +14,7 @@
 		//Game consts (same as above)
 		inline constexpr float ballRadius{ 20.0f };
 		inline const sf::Color ballColor{ sf::Color::White };
-		//inline constexpr double ballSpeed{ 10.0 };
+		inline constexpr double ballSpeed{ 150.0 };
 		inline const sf::Color wallColor{ 24, 45, 42 };
 		inline int wallThickness{ 20 };
 

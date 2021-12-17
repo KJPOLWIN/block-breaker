@@ -3,8 +3,6 @@
 #include "ball.h"
 #include <SFML/Graphics.hpp>
 
-    #include <iostream>
-
 Wall::Wall(sf::Vector2f size, sf::Vector2f position)
   : wall{ size }
 {
