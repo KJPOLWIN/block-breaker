@@ -146,10 +146,12 @@ wall.o: $(GMOB)wall.cpp $(GMOB)wall.h $(GMOB)ball.h $(SRC)constants.h
 	g++ -c $(GMOB)wall.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMOB) -I$(SRC)
 
-balldeletor.o: $(GMOB)balldeletor.cpp $(GMOB)balldeletor.h $(GMOB)ball.h $(SRC)constants.h
+balldeletor.o: $(GMOB)balldeletor.cpp $(GMOB)balldeletor.h $(GMOB)ball.h \
+							 $(SRC)constants.h
 	g++ -c $(GMOB)balldeletor.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMOB) -I$(SRC)
 
-ballgenerator.o: $(GMOB)ballgenerator.cpp $(GMOB)ballgenerator.h $(GMOB)ball.h $(SRC)constants.h
+ballgenerator.o: $(GMOB)ballgenerator.cpp $(GMOB)ballgenerator.h $(GMOB)ball.h \
+								 $(SRC)constants.h
 	g++ -c $(GMOB)ballgenerator.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(GMOB) -I$(SRC)
+			-I$(GMOB) -I$(SRC) -I$(GUI)

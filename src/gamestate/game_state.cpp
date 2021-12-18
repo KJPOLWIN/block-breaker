@@ -20,15 +20,22 @@ Game_state::Game_state()
 											 sf::Vector2f(constant::windowWidth - constant::wallThickness, 0)));
 }
 
-void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition, bool& canClick, guiText& fpsCounter, sf::RenderWindow& window, GameState& gamestate)
+void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
+										 bool& canClick, guiText& fpsCounter,
+										 sf::RenderWindow& window,
+										 GameState& gamestate)
 {
 	//Button logic
+	bool clicked{ false };
 	mousePosition = sf::Mouse::getPosition(window);
 	if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && canClick)
 	{
 		canClick = false;
-
-
+		clicked = true;
+	}
+	else
+	{
+		clicked = false;
 	}
 
 	//Updating everything
@@ -42,20 +49,16 @@ void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition, bool& can
 		}
 	}
 
-	for( auto& ball : generator.getBalls() )
-	{
-		ball.update(elapsedTime);
-	}
+	deletor.checkForCollisions(generator);
+
+	generator.update(elapsedTime, mousePosition, clicked);
 
   fpsCounter.update(std::to_string(static_cast<int>(1 / elapsedTime)));
 
 	//Drawing everything
 	window.clear(sf::Color::Black);
 
-	for( auto& ball : generator.getBalls() )
-	{
-		ball.draw(window);
-	}
+	generator.draw(window);
 
 	for( auto& wall : walls )
 	{
