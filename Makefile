@@ -22,7 +22,8 @@ TITLE = Block_breaker
 OBJ = main.o game.o animatedsprite.o hitbox.o ray.o zoomableview.o button.o \
 			checkbox.o guibar.o guitext.o nextstatebutton.o radiobutton.o \
 			radiobuttonarray.o scrollbar.o mainmenu.o game_state.o resourcemanager.o \
-			settingsmanager.o viewmanager.o ball.o wall.o balldeletor.o ballgenerator.o
+			settingsmanager.o viewmanager.o ball.o wall.o balldeletor.o ballgenerator.o \
+			block.o
 
 # Output rules
 output: $(OBJ)
@@ -117,7 +118,8 @@ mainmenu.o: $(GMST)mainmenu.cpp $(GMST)mainmenu.h $(GUI)guitext.h \
 			-I$(GMST) -I$(GUI) -I$(SRC) -I$(MNGR) -I$(UTIL)
 
 game_state.o: $(GMST)game_state.cpp $(GMST)game_state.h $(GMOB)ball.h \
-						  $(GUI)guitext.h $(MNGR)resourcemanager.h $(SRC)constants.h
+						  $(GUI)guitext.h $(MNGR)resourcemanager.h $(SRC)constants.h \
+							$(GMOB)block.h
 	g++ -c $(GMST)game_state.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMST) -I$(GUI) -I$(SRC) -I$(MNGR) -I$(UTIL) -I$(GMOB)
 
@@ -155,4 +157,9 @@ balldeletor.o: $(GMOB)balldeletor.cpp $(GMOB)balldeletor.h $(GMOB)ball.h \
 ballgenerator.o: $(GMOB)ballgenerator.cpp $(GMOB)ballgenerator.h $(GMOB)ball.h \
 								 $(SRC)constants.h
 	g++ -c $(GMOB)ballgenerator.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
+			-I$(GMOB) -I$(SRC) -I$(GUI)
+
+block.o: $(GMOB)block.cpp $(GMOB)block.h $(GMOB)ball.h $(SRC)constants.h \
+				 $(GUI)guitext.h
+	g++ -c $(GMOB)block.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMOB) -I$(SRC) -I$(GUI)

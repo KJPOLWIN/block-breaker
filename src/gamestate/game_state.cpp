@@ -5,6 +5,7 @@
 #include "settingsmanager.h"
 #include "ball.h"
 #include "wall.h"
+#include "block.h"
 #include "balldeletor.h"
 #include "ballgenerator.h"
 #include <SFML/Graphics.hpp>
@@ -18,6 +19,12 @@ Game_state::Game_state()
 											 sf::Vector2f(0, 0)));
 	walls.push_back(Wall(sf::Vector2f(constant::wallThickness, constant::windowHeight),
 											 sf::Vector2f(constant::windowWidth - constant::wallThickness, 0)));
+
+	blocks.push_back(Block(sf::Vector2f(100.f, 100.f),
+											 	 sf::Vector2f(100.f, 100.f),
+												 ResourceManager::arial,
+									       sf::Color::Red, 
+												 25));
 }
 
 void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
@@ -47,6 +54,20 @@ void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
 		}
 	}
 
+	//for( auto& block : blocks )
+	for(std::size_t iii{ 0 }; iii < blocks.size(); ++iii)
+	{
+		for( auto& ball : generator.getBalls() )
+		{
+			blocks.at(iii).checkForCollisions(ball);
+		}
+
+		if(!blocks.at(iii).isAlive())
+		{
+			blocks.erase(blocks.begin() + iii);
+		}
+	}
+
 	deletor.checkForCollisions(generator);
 
 	generator.update(elapsedTime, mousePosition, clicked);
@@ -61,6 +82,11 @@ void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
 	for( auto& wall : walls )
 	{
 		wall.draw(window);
+	}
+
+	for( auto& block : blocks )
+	{
+		block.draw(window);
 	}
 
 	if(SettingsManager::showFPSCounter)

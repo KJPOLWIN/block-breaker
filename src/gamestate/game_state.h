@@ -5,6 +5,7 @@
 	#include "gamestate.h"
 	#include "ball.h"
 	#include "wall.h"
+	#include "block.h"
 	#include "balldeletor.h"
 	#include "ballgenerator.h"
 	#include "guitext.h"
@@ -32,6 +33,7 @@
 														 };
 
 			std::vector<Wall> walls;
+			std::vector<Block> blocks;
 			BallDeletor deletor{
 													 sf::Vector2f(constant::windowWidth,
 														 						constant::wallThickness),

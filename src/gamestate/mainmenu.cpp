@@ -8,7 +8,7 @@
 
 MainMenu::MainMenu()
 {
-	startButton.setPosition(sf::Vector2f(400, 600));
+	startButton.setPosition(sf::Vector2f(constant::windowWidth * 0.5, constant::windowHeight * 0.75));
 }
 
 void MainMenu::run(double& elapsedTime, sf::Vector2i& mousePosition, bool& canClick, guiText& fpsCounter, sf::RenderWindow& window, GameState& gamestate)
