@@ -22,7 +22,11 @@
     void shotBall(double elapsedTime);
 
     std::vector<Ball>& getBalls();
-    void returnBall();
+    int getBallsNumber();
+    int getMaxBallsNumber();
+
+    void setPosition(sf::Vector2f newPosition);
+    Phase getPhase();
 
   private:
     std::vector<Ball> balls{  };
@@ -32,8 +36,8 @@
     double cooldown{ 0.0 };
     double maxCooldown{ 0.0 };
 
-    int maxBallsNumber{ 3 };
-    int ballsNumber{ 3 };
+    int maxBallsNumber{ 20 };
+    int ballsNumber{ 20 };
 
     std::vector<sf::Vertex> aimingLine{  };
     Phase phase{ Phase::Aiming };

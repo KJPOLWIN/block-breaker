@@ -116,7 +116,8 @@ mainmenu.o: $(GMST)mainmenu.cpp $(GMST)mainmenu.h $(GUI)guitext.h \
 	g++ -c $(GMST)mainmenu.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMST) -I$(GUI) -I$(SRC) -I$(MNGR) -I$(UTIL)
 
-game_state.o: $(GMST)game_state.cpp $(GMST)game_state.h $(GMOB)ball.h
+game_state.o: $(GMST)game_state.cpp $(GMST)game_state.h $(GMOB)ball.h \
+						  $(GUI)guitext.h $(MNGR)resourcemanager.h $(SRC)constants.h
 	g++ -c $(GMST)game_state.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMST) -I$(GUI) -I$(SRC) -I$(MNGR) -I$(UTIL) -I$(GMOB)
 

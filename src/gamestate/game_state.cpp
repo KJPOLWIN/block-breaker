@@ -39,8 +39,6 @@ void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
 	}
 
 	//Updating everything
-	generator.shotBall(elapsedTime);
-
 	for( auto& wall : walls )
 	{
 		for( auto& ball : generator.getBalls() )
@@ -54,7 +52,7 @@ void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
 	generator.update(elapsedTime, mousePosition, clicked);
 
   fpsCounter.update(std::to_string(static_cast<int>(1 / elapsedTime)));
-
+	ballsNumberText.update(std::to_string(generator.getBallsNumber()) + "/" + std::to_string(generator.getMaxBallsNumber()));
 	//Drawing everything
 	window.clear(sf::Color::Black);
 
@@ -69,6 +67,8 @@ void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
 	{
 		fpsCounter.draw(&window);
 	}
+
+	ballsNumberText.draw(&window);
 
 	window.display();
 }

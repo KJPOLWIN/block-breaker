@@ -7,7 +7,7 @@
 
 BallGenerator::BallGenerator(sf::Vector2f position, double maxCooldown)
   : position{ position },
-    cooldown{ maxCooldown },
+    cooldown{ 0.0 },
     maxCooldown{ maxCooldown }
 {
   aimingLine.push_back(sf::Vertex(position, sf::Color::Red));
@@ -19,16 +19,18 @@ void BallGenerator::update(double elapsedTime, sf::Vector2i mousePosition, bool 
 
   if(phase == Phase::Aiming)
   {
+    aimingLine.at(0).position = position;
     //SFML won't let assing Vector2f to Vector2i
     aimingLine.at(1).position.x = mousePosition.x;
     aimingLine.at(1).position.y = mousePosition.y;
 
-    double distance{ sqrt(pow(mousePosition.x - position.x, 2) + pow(mousePosition.y - position.y, 2)) };
-    rotation = sf::Vector2f((mousePosition.x - position.x) / distance,
-                            (mousePosition.y - position.y) / distance);
-
     if(clicked)
     {
+      double distance{ sqrt(pow(mousePosition.x - position.x, 2)
+                          + pow(mousePosition.y - position.y, 2)) };
+      rotation = sf::Vector2f((mousePosition.x - position.x) / distance,
+                              (mousePosition.y - position.y) / distance);
+
       phase = Phase::Firing;
     }
   }
@@ -76,7 +78,22 @@ std::vector<Ball>& BallGenerator::getBalls()
   return balls;
 }
 
-void BallGenerator::returnBall()
+int BallGenerator::getBallsNumber()
 {
-  ++ballsNumber;
+  return ballsNumber;
+}
+
+int BallGenerator::getMaxBallsNumber()
+{
+  return maxBallsNumber;
+}
+
+void BallGenerator::setPosition(sf::Vector2f newPosition)
+{
+  position = newPosition;
+}
+
+Phase BallGenerator::getPhase()
+{
+  return phase;
 }

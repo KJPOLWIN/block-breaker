@@ -14,6 +14,8 @@
 
     private:
       sf::RectangleShape deletor{  };
+      bool firstHit{ true };
+      sf::Vector2f generatorNewPosition{ 0, 0 };
   };
 
 #endif
