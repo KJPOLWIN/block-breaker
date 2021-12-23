@@ -12,6 +12,7 @@
 		inline const sf::Color wallColor{ 24, 45, 42 };
 		inline constexpr int wallThickness{ 20 };
 		inline constexpr int blocksInRow{ 5 };
+		inline constexpr int blocksInColumn{ 8 };  	//Number of blocks + 1 block-size gap on the top
 		inline constexpr double blockSize{ 100.0 };
 		inline constexpr double gapSize{ 5.0 };
 
@@ -19,7 +20,9 @@
 		inline constexpr double windowWidth{ 2 * wallThickness
 																			+ (blocksInRow + 1) * gapSize
 																			+ blocksInRow * blockSize };
-		inline constexpr double windowHeight{ 1000.0 };
+		inline constexpr double windowHeight{ wallThickness
+		 																	  + (blocksInColumn + 3) * gapSize
+																			  + (blocksInColumn + 1) * blockSize };
 		inline constexpr sf::Uint32 windowStyle{ sf::Style::Default };
 		inline const sf::Color fpsCounterColor{ sf::Color::Red };
 

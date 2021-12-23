@@ -19,6 +19,7 @@ void BallGenerator::update(double elapsedTime, sf::Vector2i mousePosition, bool 
 
   if(phase == Phase::Aiming)
   {
+    nextLevelSignal = false;
     aimingLine.at(0).position = position;
     //SFML won't let assing Vector2f to Vector2i
     aimingLine.at(1).position.x = mousePosition.x;
@@ -47,6 +48,7 @@ void BallGenerator::update(double elapsedTime, sf::Vector2i mousePosition, bool 
     {
       ballsNumber = maxBallsNumber;
       phase = Phase::Aiming;
+      nextLevelSignal = true;
     }
   }
 }
@@ -96,4 +98,9 @@ void BallGenerator::setPosition(sf::Vector2f newPosition)
 Phase BallGenerator::getPhase()
 {
   return phase;
+}
+
+bool BallGenerator::getNextLevelSignal()
+{
+  return nextLevelSignal;
 }

@@ -3,6 +3,8 @@
 #include "ball.h"
 #include <SFML/Graphics.hpp>
 
+    #include <iostream>
+
 Block::Block(sf::Vector2f size, sf::Vector2f position, sf::Font &font,
              sf::Color textColor, unsigned int textSize)
   : block{ size },
@@ -40,17 +42,14 @@ void Block::checkForCollisions(Ball& ball)
     {
       ball.bounce(sf::Vector2i(0, 1));
     }
-
     else if(block.getPosition().x > ball.getPosition().x)
     {
       ball.bounce(sf::Vector2i(1, 0));
     }
-
     else if(block.getPosition().x + block.getSize().x < ball.getPosition().x)
     {
       ball.bounce(sf::Vector2i(-1, 0));
     }
-
     else if(block.getPosition().y > ball.getPosition().y)
     {
       ball.bounce(sf::Vector2i(0, -1));
@@ -71,4 +70,10 @@ void Block::draw(sf::RenderWindow& targetWindow)
 bool Block::isAlive()
 {
   return hitPoints > 0;
+}
+
+void Block::move(sf::Vector2f offset)
+{
+  block.setPosition(block.getPosition() + offset);
+  hitPointsText.setPosition(block.getPosition() + sf::Vector2f(1, 1));
 }

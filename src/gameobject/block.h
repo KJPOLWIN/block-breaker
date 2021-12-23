@@ -4,6 +4,7 @@
   #include "block.h"
   #include "ball.h"
   #include "guitext.h"
+  #include "constants.h"
   #include <SFML/Graphics.hpp>
 
   class Block
@@ -16,6 +17,8 @@
       void draw(sf::RenderWindow& targetWindow);
 
       bool isAlive();
+
+      void move(sf::Vector2f offset);
 
     private:
       sf::RectangleShape block{  };

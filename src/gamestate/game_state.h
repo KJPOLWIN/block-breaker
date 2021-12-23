@@ -10,6 +10,7 @@
 	#include "ballgenerator.h"
 	#include "guitext.h"
 	#include "resourcemanager.h"
+	#include "blockgenerator.h"
 	#include "constants.h"
 	#include <SFML/Graphics.hpp>
 	#include <vector>
@@ -32,8 +33,8 @@
 													     0.2
 														 };
 
-			std::vector<Wall> walls;
-			std::vector<Block> blocks;
+			std::vector<Wall> walls{  };
+			BlockGenerator blocks{  };
 			BallDeletor deletor{
 													 sf::Vector2f(constant::windowWidth,
 														 						constant::wallThickness),

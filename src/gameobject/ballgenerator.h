@@ -28,6 +28,8 @@
     void setPosition(sf::Vector2f newPosition);
     Phase getPhase();
 
+    bool getNextLevelSignal();
+
   private:
     std::vector<Ball> balls{  };
     sf::Vector2f position{ 0, 0 };
@@ -41,6 +43,8 @@
 
     std::vector<sf::Vertex> aimingLine{  };
     Phase phase{ Phase::Aiming };
+
+    bool nextLevelSignal{ false };
   };
 
 #endif
