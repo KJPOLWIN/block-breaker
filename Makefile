@@ -165,6 +165,7 @@ block.o: $(GMOB)block.cpp $(GMOB)block.h $(GMOB)ball.h $(SRC)constants.h \
 			-I$(GMOB) -I$(SRC) -I$(GUI)
 
 blockgenerator.o: $(GMOB)blockgenerator.cpp $(GMOB)blockgenerator.h $(GMOB)block.h \
-								 	$(SRC)constants.h $(GMOB)ballgenerator.h $(MNGR)resourcemanager.h
+								 	$(SRC)constants.h $(GMOB)ballgenerator.h $(MNGR)resourcemanager.h \
+									$(SRC)random.h
 	g++ -c $(GMOB)blockgenerator.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMOB) -I$(SRC) -I$(GUI) -I$(MNGR) -I$(UTIL)
