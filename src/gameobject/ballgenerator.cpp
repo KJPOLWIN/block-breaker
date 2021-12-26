@@ -1,8 +1,11 @@
 #include "ballgenerator.h"
 #include "ball.h"
+#include "guitext.h"
+#include "resourcemanager.h"
 #include "constants.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <string>
 #include <cmath>
 
 BallGenerator::BallGenerator(sf::Vector2f position, double maxCooldown)
@@ -12,6 +15,8 @@ BallGenerator::BallGenerator(sf::Vector2f position, double maxCooldown)
 {
   aimingLine.push_back(sf::Vertex(position, sf::Color::Red));
   aimingLine.push_back(sf::Vertex(position, sf::Color::Red));
+
+  ballsNumberText.setPosition(position + sf::Vector2f(-5, -50));
 }
 
 void BallGenerator::update(double elapsedTime, sf::Vector2i mousePosition, bool clicked)
@@ -51,6 +56,8 @@ void BallGenerator::update(double elapsedTime, sf::Vector2i mousePosition, bool 
       nextLevelSignal = true;
     }
   }
+
+  ballsNumberText.update(std::to_string(ballsNumber));
 }
 
 void BallGenerator::draw(sf::RenderWindow& window)
@@ -61,6 +68,8 @@ void BallGenerator::draw(sf::RenderWindow& window)
 	{
 		ball.draw(window);
 	}
+
+  ballsNumberText.draw(&window);
 }
 
 void BallGenerator::shotBall(double elapsedTime)
@@ -93,6 +102,12 @@ int BallGenerator::getMaxBallsNumber()
 void BallGenerator::setPosition(sf::Vector2f newPosition)
 {
   position = newPosition;
+  ballsNumberText.setPosition(position + sf::Vector2f(-5, -50));
+}
+
+sf::Vector2f BallGenerator::getPosition()
+{
+  return position;
 }
 
 Phase BallGenerator::getPhase()
@@ -103,4 +118,10 @@ Phase BallGenerator::getPhase()
 bool BallGenerator::getNextLevelSignal()
 {
   return nextLevelSignal;
+}
+
+void BallGenerator::reset()
+{
+  balls.clear();
+
 }

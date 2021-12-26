@@ -8,19 +8,14 @@
 
 BlockGenerator::BlockGenerator()
 {
-  blocks.push_back(Block(sf::Vector2f(constant::blockSize, constant::blockSize),
-											 	 sf::Vector2f(constant::wallThickness + 2 * constant::gapSize + constant::blockSize,
-                                      constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
-												 ResourceManager::arial,
-									       sf::Color::Red,
-												 25));
+  generateRow(1);
 }
 
 void BlockGenerator::generateRow(int level)
 {
   for( auto& block : blocks )
   {
-    block.move(sf::Vector2f(0, constant::blockSize + constant::gapSize));
+    block.move();
   }
 
   int blocksToAdd{ Random::getRandom(1, constant::blocksInRow - 1) };
@@ -37,7 +32,8 @@ void BlockGenerator::generateRow(int level)
                                             constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
       												 ResourceManager::arial,
       									       sf::Color::Red,
-      												 25));
+      												 25,
+                               level));
         --blocksToAdd;
       }
     }
@@ -48,7 +44,8 @@ void BlockGenerator::generateRow(int level)
                                           constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
     												 ResourceManager::arial,
     									       sf::Color::Red,
-    												 25));
+    												 25,
+                             level));
       --blocksToAdd;
     }
 
@@ -86,4 +83,23 @@ void BlockGenerator::draw(sf::RenderWindow& targetWindow)
   {
     block.draw(targetWindow);
   }
+}
+
+bool BlockGenerator::blocksInLastRow()
+{
+  for( auto& block : blocks )
+  {
+    if(block.getRow() == constant::blocksInColumn + 1)
+    {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+void BlockGenerator::reset()
+{
+  blocks.clear();
+  generateRow(1);
 }

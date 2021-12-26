@@ -6,8 +6,9 @@
     #include <iostream>
 
 Block::Block(sf::Vector2f size, sf::Vector2f position, sf::Font &font,
-             sf::Color textColor, unsigned int textSize)
+             sf::Color textColor, unsigned int textSize, int hitPoints)
   : block{ size },
+    hitPoints{ hitPoints },
     hitPointsText{ font, std::to_string(hitPoints), textColor, textSize,
                    position + sf::Vector2f(1.0f, 1.0f) }
 {
@@ -72,8 +73,15 @@ bool Block::isAlive()
   return hitPoints > 0;
 }
 
-void Block::move(sf::Vector2f offset)
+void Block::move()
 {
-  block.setPosition(block.getPosition() + offset);
-  hitPointsText.setPosition(block.getPosition() + sf::Vector2f(1, 1));
+  block.setPosition(block.getPosition()
+                  + sf::Vector2f(0, constant::blockSize + constant::gapSize));
+  hitPointsText.setPosition(block.getPosition() + sf::Vector2f(1.0f, 1.0f));
+  ++row;
+}
+
+int Block::getRow()
+{
+  return row;
 }

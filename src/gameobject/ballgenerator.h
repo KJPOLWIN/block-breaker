@@ -2,6 +2,8 @@
 #define BALLGENERATOR_H
 
   #include "ball.h"
+  #include "guitext.h"
+  #include "resourcemanager.h"
   #include <SFML/Graphics.hpp>
   #include <vector>
 
@@ -26,9 +28,13 @@
     int getMaxBallsNumber();
 
     void setPosition(sf::Vector2f newPosition);
+    sf::Vector2f getPosition();
+    
     Phase getPhase();
 
     bool getNextLevelSignal();
+
+    void reset();
 
   private:
     std::vector<Ball> balls{  };
@@ -45,6 +51,14 @@
     Phase phase{ Phase::Aiming };
 
     bool nextLevelSignal{ false };
+
+    guiText ballsNumberText{
+                             ResourceManager::arial,
+                             "",
+                             sf::Color::Red,
+                             30,
+                             sf::Vector2f()
+                           };
   };
 
 #endif

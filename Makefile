@@ -152,12 +152,12 @@ wall.o: $(GMOB)wall.cpp $(GMOB)wall.h $(GMOB)ball.h $(SRC)constants.h
 balldeletor.o: $(GMOB)balldeletor.cpp $(GMOB)balldeletor.h $(GMOB)ball.h \
 							 $(SRC)constants.h
 	g++ -c $(GMOB)balldeletor.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(GMOB) -I$(SRC)
+			-I$(GMOB) -I$(SRC) -I$(GUI) -I$(MNGR) -I$(UTIL)
 
 ballgenerator.o: $(GMOB)ballgenerator.cpp $(GMOB)ballgenerator.h $(GMOB)ball.h \
-								 $(SRC)constants.h
+								 $(SRC)constants.h $(MNGR)resourcemanager.h
 	g++ -c $(GMOB)ballgenerator.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(GMOB) -I$(SRC) -I$(GUI)
+			-I$(GMOB) -I$(SRC) -I$(GUI) -I$(MNGR) -I$(UTIL)
 
 block.o: $(GMOB)block.cpp $(GMOB)block.h $(GMOB)ball.h $(SRC)constants.h \
 				 $(GUI)guitext.h
@@ -168,4 +168,4 @@ blockgenerator.o: $(GMOB)blockgenerator.cpp $(GMOB)blockgenerator.h $(GMOB)block
 								 	$(SRC)constants.h $(GMOB)ballgenerator.h $(MNGR)resourcemanager.h \
 									$(SRC)random.h
 	g++ -c $(GMOB)blockgenerator.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(GMOB) -I$(SRC) -I$(GUI) -I$(MNGR) -I$(UTIL)
+			-I$(GMOB) -I$(SRC) -I$(GUI) -I$(MNGR) -I$(UTIL) -I$(GUI)

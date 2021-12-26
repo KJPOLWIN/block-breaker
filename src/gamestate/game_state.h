@@ -38,19 +38,18 @@
 			BallDeletor deletor{
 													 sf::Vector2f(constant::windowWidth,
 														 						constant::wallThickness),
-													 sf::Vector2f(0,
-														 						constant::windowHeight
-																			- constant::wallThickness)
+													 sf::Vector2f(0, constant::windowHeight)
 												 };
 
-			guiText ballsNumberText{
-															 ResourceManager::arial,
-															 "",
-															 sf::Color::Red,
-						  								 50,
-															 sf::Vector2f(constant::windowWidth - 200.0,
-																 								25.0)
-														 };
+			int level{ 1 };
+
+			guiText levelText{
+	                             ResourceManager::arial,
+	                             "",
+	                             sf::Color::Red,
+	                             50,
+	                             sf::Vector2f(constant::windowWidth - 200.f, 50.0f)
+	                           };
 	};
 
 #endif

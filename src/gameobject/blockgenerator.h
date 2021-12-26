@@ -17,6 +17,10 @@
       void update(BallGenerator& generator, bool nextLevelSignal, int level);
       void draw(sf::RenderWindow& targetWindow);
 
+      bool blocksInLastRow();
+
+      void reset();
+
     private:
       std::vector<Block> blocks;
 

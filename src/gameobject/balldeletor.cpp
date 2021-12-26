@@ -44,10 +44,10 @@ void BallDeletor::checkForCollisions(BallGenerator& ballGenerator)
         ballGenerator.getBalls().erase(ballGenerator.getBalls().begin() + iii);
       }
     }
-    
+
     if(ballGenerator.getPhase() == Phase::Aiming && generatorNewPosition.x > 0)
     {
       firstHit = true;
-      ballGenerator.setPosition(generatorNewPosition);
+      ballGenerator.setPosition(sf::Vector2f(generatorNewPosition.x, ballGenerator.getPosition().y));
     }
 }

@@ -20,13 +20,6 @@ Game_state::Game_state()
 											 sf::Vector2f(0, 0)));
 	walls.push_back(Wall(sf::Vector2f(constant::wallThickness, constant::windowHeight),
 											 sf::Vector2f(constant::windowWidth - constant::wallThickness, 0)));
-
-
-	// blocks.push_back(Block(sf::Vector2f(100.f, 100.f),
-	// 										 	 sf::Vector2f(100.f, 100.f),
-	// 											 ResourceManager::arial,
-	// 								       sf::Color::Red,
-	// 											 25));
 }
 
 void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
@@ -48,6 +41,18 @@ void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
 	}
 
 	//Updating everything
+	if(blocks.blocksInLastRow())
+	{
+		blocks.reset();
+		generator.reset();
+		level = 1;
+		generator.setPosition( sf::Vector2f(constant::windowWidth * 0.5,
+																				constant::windowHeight
+																				- constant::wallThickness
+																				- constant::ballRadius - 10.0f));
+		gamestate = GameState::MainMenu;
+	}
+
 	for( auto& wall : walls )
 	{
 		for( auto& ball : generator.getBalls() )
@@ -56,14 +61,20 @@ void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
 		}
 	}
 
-	blocks.update(generator, generator.getNextLevelSignal(), 1);
+	blocks.update(generator, generator.getNextLevelSignal(), level);
 
 	deletor.checkForCollisions(generator);
 
 	generator.update(elapsedTime, mousePosition, clicked);
 
+	if(generator.getNextLevelSignal())
+	{
+		++level;
+	}
+
+	levelText.update(std::to_string(level));
+
   fpsCounter.update(std::to_string(static_cast<int>(1 / elapsedTime)));
-	ballsNumberText.update(std::to_string(generator.getBallsNumber()) + "/" + std::to_string(generator.getMaxBallsNumber()));
 
 	//Drawing everything
 	window.clear(sf::Color::Black);
@@ -83,7 +94,7 @@ void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
 		fpsCounter.draw(&window);
 	}
 
-	ballsNumberText.draw(&window);
+	levelText.draw(&window);
 
 	window.display();
 }

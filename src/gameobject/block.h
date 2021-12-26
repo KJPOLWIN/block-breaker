@@ -11,14 +11,16 @@
   {
     public:
       Block(sf::Vector2f size, sf::Vector2f position, sf::Font &font,
-            sf::Color textColor, unsigned int textSize);
+            sf::Color textColor, unsigned int textSize, int hitPoints);
 
       void checkForCollisions(Ball& ball);
       void draw(sf::RenderWindow& targetWindow);
 
       bool isAlive();
 
-      void move(sf::Vector2f offset);
+      void move();
+
+      int getRow();
 
     private:
       sf::RectangleShape block{  };
@@ -26,6 +28,8 @@
       int hitPoints{ 30 };
 
       guiText hitPointsText{  };
+
+      int row{ 2 };
   };
 
 #endif
