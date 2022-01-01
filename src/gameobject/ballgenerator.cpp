@@ -99,6 +99,11 @@ int BallGenerator::getMaxBallsNumber()
   return maxBallsNumber;
 }
 
+void BallGenerator::addBall()
+{
+  ++maxBallsNumber;
+}
+
 void BallGenerator::setPosition(sf::Vector2f newPosition)
 {
   position = newPosition;
@@ -123,5 +128,6 @@ bool BallGenerator::getNextLevelSignal()
 void BallGenerator::reset()
 {
   balls.clear();
-
+  ballsNumber = 1;
+  maxBallsNumber = 1;
 }

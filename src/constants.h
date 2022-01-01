@@ -11,7 +11,7 @@
 		inline constexpr double ballSpeed{ 2000.0 };
 		inline const sf::Color wallColor{ 24, 45, 42 };
 		inline constexpr int wallThickness{ 20 };
-		inline constexpr int blocksInRow{ 5 };
+		inline constexpr int blocksInRow{ 7 };
 		inline constexpr int blocksInColumn{ 8 };  	//Number of blocks + 1 block-size gap on the top
 		inline constexpr double blockSize{ 100.0 };
 		inline constexpr double gapSize{ 5.0 };

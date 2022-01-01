@@ -3,6 +3,7 @@
 
   #include "block.h"
   #include "ballgenerator.h"
+  #include "extraballpowerup.h"
   #include "constants.h"
   #include <SFML/Graphics.hpp>
   #include <vector>
@@ -22,7 +23,8 @@
       void reset();
 
     private:
-      std::vector<Block> blocks;
+      std::vector<Block> blocks{  };
+      std::vector<ExtraBallPowerUp> extraBallPowerUps{  };
 
   };
 

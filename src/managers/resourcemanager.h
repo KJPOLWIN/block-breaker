@@ -13,27 +13,18 @@
 			static sf::Font arial;
 
 			//TEXTURES
-			//	Empty texture
-			//static sf::Texture nothingnessTexture;
-
 			//	Buttons
 			static sf::Texture startButtonTexture;
 
-			//	GUI
-
-			//	Backgrounds
-
+			//	Power ups
+			static sf::Texture extraBallTexture;
 
 			//SPRITES
-			//	Empty sprite
-			//static AnimatedSprite nothingness;
-
 			//	Buttons
 			static AnimatedSprite startButton;
 
-			//	GUI
-
-			//	Backgrounds
+			//	Power ups
+			static AnimatedSprite extraBall;
 
 		private:
 			ResourceManager() {  }

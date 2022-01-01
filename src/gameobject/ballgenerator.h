@@ -26,10 +26,11 @@
     std::vector<Ball>& getBalls();
     int getBallsNumber();
     int getMaxBallsNumber();
+    void addBall();
 
     void setPosition(sf::Vector2f newPosition);
     sf::Vector2f getPosition();
-    
+
     Phase getPhase();
 
     bool getNextLevelSignal();
