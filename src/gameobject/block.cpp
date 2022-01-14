@@ -10,7 +10,9 @@ Block::Block(sf::Vector2f size, sf::Vector2f position, sf::Font &font,
   : block{ size },
     hitPoints{ hitPoints },
     hitPointsText{ font, std::to_string(hitPoints), textColor, textSize,
-                   position + sf::Vector2f(1.0f, 1.0f) }
+                   position + sf::Vector2f(1.0f, 1.0f) },
+    position{ sf::Vector2i((position.x - constant::wallThickness - constant::gapSize) / (constant::blockSize + constant::gapSize),
+                           (position.y - constant::wallThickness - constant::gapSize) / (constant::blockSize + constant::gapSize)) }
 {
   block.setPosition(position);
   block.setFillColor(sf::Color::Yellow);
@@ -35,9 +37,7 @@ void Block::checkForCollisions(Ball& ball)
   || (ball.getPosition().y - constant::ballRadius < block.getPosition().y
   && ball.getPosition().y - constant::ballRadius > block.getPosition().y + block.getSize().y))))
   {
-    wasHitInCurrentFrame = true;
-    --hitPoints;
-    hitPointsText.update(std::to_string(hitPoints));
+    decreaseHealth();
 
     if(block.getPosition().y + block.getSize().y < ball.getPosition().y)
     {
@@ -68,6 +68,13 @@ void Block::draw(sf::RenderWindow& targetWindow)
   hitPointsText.draw(&targetWindow);
 }
 
+void Block::decreaseHealth(int damage /* = 1*/)
+{
+  wasHitInCurrentFrame = true;
+  hitPoints -= damage;
+  hitPointsText.update(std::to_string(hitPoints));
+}
+
 bool Block::isAlive()
 {
   return hitPoints > 0;
@@ -78,10 +85,15 @@ void Block::move()
   block.setPosition(block.getPosition()
                   + sf::Vector2f(0, constant::blockSize + constant::gapSize));
   hitPointsText.setPosition(block.getPosition() + sf::Vector2f(1.0f, 1.0f));
-  ++row;
+  ++position.y;
 }
 
 int Block::getRow()
 {
-  return row;
+  return position.y;
+}
+
+int Block::getColumn()
+{
+  return position.x;
 }

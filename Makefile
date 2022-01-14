@@ -23,7 +23,7 @@ OBJ = main.o game.o animatedsprite.o hitbox.o ray.o zoomableview.o button.o \
 			checkbox.o guibar.o guitext.o nextstatebutton.o radiobutton.o \
 			radiobuttonarray.o scrollbar.o mainmenu.o game_state.o resourcemanager.o \
 			settingsmanager.o viewmanager.o ball.o wall.o balldeletor.o ballgenerator.o \
-			block.o blockgenerator.o extraballpowerup.o
+			block.o blockgenerator.o extraballpowerup.o verticaldamagepowerup.o horizontaldamagepowerup.o
 
 # Output rules
 output: $(OBJ)
@@ -166,11 +166,21 @@ block.o: $(GMOB)block.cpp $(GMOB)block.h $(GMOB)ball.h $(SRC)constants.h \
 
 blockgenerator.o: $(GMOB)blockgenerator.cpp $(GMOB)blockgenerator.h $(GMOB)block.h \
 								 	$(SRC)constants.h $(GMOB)ballgenerator.h $(MNGR)resourcemanager.h \
-									$(SRC)random.h $(GMOB)extraballpowerup.h
+									$(SRC)random.h $(GMOB)extraballpowerup.h $(GMOB)verticaldamagepowerup.h
 	g++ -c $(GMOB)blockgenerator.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMOB) -I$(SRC) -I$(GUI) -I$(MNGR) -I$(UTIL) -I$(GUI)
 
 extraballpowerup.o: $(GMOB)extraballpowerup.cpp $(GMOB)extraballpowerup.h \
 										$(GMOB)block.h $(GMOB)ballgenerator.h
 	g++ -c $(GMOB)extraballpowerup.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
+			-I$(GMOB) -I$(SRC) -I$(UTIL) -I$(GUI) -I$(MNGR)
+
+verticaldamagepowerup.o: $(GMOB)verticaldamagepowerup.cpp $(GMOB)verticaldamagepowerup.h \
+										$(GMOB)block.h $(GMOB)ballgenerator.h $(GMOB)blockgenerator.h
+	g++ -c $(GMOB)verticaldamagepowerup.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
+			-I$(GMOB) -I$(SRC) -I$(UTIL) -I$(GUI) -I$(MNGR)
+
+horizontaldamagepowerup.o: $(GMOB)horizontaldamagepowerup.cpp $(GMOB)horizontaldamagepowerup.h \
+										$(GMOB)block.h $(GMOB)ballgenerator.h $(GMOB)blockgenerator.h
+	g++ -c $(GMOB)horizontaldamagepowerup.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMOB) -I$(SRC) -I$(UTIL) -I$(GUI) -I$(MNGR)

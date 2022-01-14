@@ -16,11 +16,14 @@
       void checkForCollisions(Ball& ball);
       void draw(sf::RenderWindow& targetWindow);
 
+      void decreaseHealth(int damage = 1);
+
       bool isAlive();
 
       void move();
 
       int getRow();
+      int getColumn();
 
     private:
       sf::RectangleShape block{  };
@@ -29,7 +32,8 @@
 
       guiText hitPointsText{  };
 
-      int row{ 2 };
+      //int row{ 2 };
+      sf::Vector2i position{  };  //Position in grid, not in xy coordinates
   };
 
 #endif
