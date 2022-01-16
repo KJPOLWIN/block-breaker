@@ -5,6 +5,7 @@
 #include "verticaldamagepowerup.h"
 #include "horizontaldamagepowerup.h"
 #include "resourcemanager.h"
+#include "flipperpowerup.h"
 #include "random.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -36,6 +37,11 @@ void BlockGenerator::generateRow(int level)
   for( auto& horizontalDamagePowerUp : horizontalDamagePowerUps )
   {
     horizontalDamagePowerUp.move();
+  }
+
+  for( auto& flipperPowerUp : flipperPowerUps )
+  {
+    flipperPowerUp.move();
   }
 
   int blocksToAdd{ Random::getRandomInt(1, constant::blocksInRow - 1) };
@@ -89,10 +95,20 @@ void BlockGenerator::generateRow(int level)
                                         );
             --powerUpsToAdd;
           }
-          else
+          else if(random == 3)
           {
             horizontalDamagePowerUps.push_back(
-              HorizontalDamagePowerUp(ResourceManager::verticalDamage,
+              HorizontalDamagePowerUp(ResourceManager::horizontalDamage,
+                             sf::Vector2f(constant::blockSize, constant::blockSize),
+                             sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+                                          constant::wallThickness + 2 * constant::gapSize + constant::blockSize))
+                                        );
+            --powerUpsToAdd;
+          }
+          else
+          {
+            flipperPowerUps.push_back(
+              FlipperPowerUp(ResourceManager::flipper,
                              sf::Vector2f(constant::blockSize, constant::blockSize),
                              sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
                                           constant::wallThickness + 2 * constant::gapSize + constant::blockSize))
@@ -126,26 +142,26 @@ void BlockGenerator::generateRow(int level)
   }
 
 
-  for( auto& block : blocks )
-  {
-    std::cout << block.getColumn() << ", " << block.getRow() << "\n";
-  }
-  std::cout << "\n";
-  for( auto& extraBallPowerUp : extraBallPowerUps )
-  {
-    std::cout << extraBallPowerUp.getPosition().x << ", " << extraBallPowerUp.getPosition().y << "\n";
-  }
-  std::cout << "\n";
-  for( auto& verticalDamagePowerUp : verticalDamagePowerUps )
-  {
-    std::cout << verticalDamagePowerUp.getPosition().x << ", " << verticalDamagePowerUp.getPosition().y << "\n";
-  }
-  std::cout << "\n";
-  for( auto& horizontalDamagePowerUp : horizontalDamagePowerUps )
-  {
-    std::cout << horizontalDamagePowerUp.getPosition().x << ", " << horizontalDamagePowerUp.getPosition().y << "\n";
-  }
-  std::cout << "\n\n";
+  // for( auto& block : blocks )
+  // {
+  //   std::cout << block.getColumn() << ", " << block.getRow() << "\n";
+  // }
+  // std::cout << "\n";
+  // for( auto& extraBallPowerUp : extraBallPowerUps )
+  // {
+  //   std::cout << extraBallPowerUp.getPosition().x << ", " << extraBallPowerUp.getPosition().y << "\n";
+  // }
+  // std::cout << "\n";
+  // for( auto& verticalDamagePowerUp : verticalDamagePowerUps )
+  // {
+  //   std::cout << verticalDamagePowerUp.getPosition().x << ", " << verticalDamagePowerUp.getPosition().y << "\n";
+  // }
+  // std::cout << "\n";
+  // for( auto& horizontalDamagePowerUp : horizontalDamagePowerUps )
+  // {
+  //   std::cout << horizontalDamagePowerUp.getPosition().x << ", " << horizontalDamagePowerUp.getPosition().y << "\n";
+  // }
+  // std::cout << "\n\n";
 }
 
 void BlockGenerator::update(BallGenerator& generator, bool nextLevelSignal, int level)
@@ -167,6 +183,14 @@ void BlockGenerator::update(BallGenerator& generator, bool nextLevelSignal, int 
   		if(!horizontalDamagePowerUps.at(iii).isAlive())
   		{
   			horizontalDamagePowerUps.erase(horizontalDamagePowerUps.begin() + iii);
+  		}
+  	}
+
+    for(std::size_t iii{ 0 }; iii < flipperPowerUps.size(); ++iii)
+  	{
+  		if(!flipperPowerUps.at(iii).isAlive())
+  		{
+  			flipperPowerUps.erase(flipperPowerUps.begin() + iii);
   		}
   	}
   }
@@ -192,6 +216,11 @@ void BlockGenerator::update(BallGenerator& generator, bool nextLevelSignal, int 
   for( auto& horizontalDamagePowerUp : horizontalDamagePowerUps )
   {
     horizontalDamagePowerUp.update(generator, blocks);
+  }
+
+  for( auto& flipperPowerUp : flipperPowerUps )
+  {
+    flipperPowerUp.update(generator);
   }
 
   for(std::size_t iii{ 0 }; iii < extraBallPowerUps.size(); ++iii)
@@ -221,6 +250,16 @@ void BlockGenerator::draw(sf::RenderWindow& targetWindow)
   {
     verticalDamagePowerUp.draw(targetWindow);
   }
+
+  for( auto& horizontalDamagePowerUp : horizontalDamagePowerUps )
+  {
+    horizontalDamagePowerUp.draw(targetWindow);
+  }
+
+  for( auto& flipperPowerUp : flipperPowerUps )
+  {
+    flipperPowerUp.draw(targetWindow);
+  }
 }
 
 std::vector<Block> BlockGenerator::getBlocks()
@@ -246,5 +285,7 @@ void BlockGenerator::reset()
   blocks.clear();
   extraBallPowerUps.clear();
   verticalDamagePowerUps.clear();
+  horizontalDamagePowerUps.clear();
+  flipperPowerUps.clear();
   generateRow(1);
 }

@@ -1,5 +1,6 @@
 #include "ball.h"
 #include "constants.h"
+#include "random.h"
 #include <SFML/Graphics.hpp>
 
 Ball::Ball(sf::Vector2f initialPosition, double speed, sf::Vector2f direction)
@@ -43,4 +44,9 @@ sf::Vector2f Ball::getPosition()
 sf::FloatRect Ball::getGlobalBounds()
 {
   return ball.getGlobalBounds();
+}
+
+void Ball::deflect()
+{
+  velocity.x = Random::getRandomDouble(-1.0, 1.0) * constant::ballSpeed;
 }

@@ -19,6 +19,8 @@
 			//	Power ups
 			static sf::Texture extraBallTexture;
 			static sf::Texture verticalDamageTexture;
+			static sf::Texture horizontalDamageTexture;
+			static sf::Texture flipperTexture;
 
 			//SPRITES
 			//	Buttons
@@ -27,6 +29,8 @@
 			//	Power ups
 			static AnimatedSprite extraBall;
 			static AnimatedSprite verticalDamage;
+			static AnimatedSprite horizontalDamage;
+			static AnimatedSprite flipper;
 
 		private:
 			ResourceManager() {  }

@@ -6,6 +6,7 @@
   #include "extraballpowerup.h"
   #include "verticaldamagepowerup.h"
   #include "horizontaldamagepowerup.h"
+  #include "flipperpowerup.h"
   #include "constants.h"
   #include <SFML/Graphics.hpp>
   #include <vector>
@@ -31,6 +32,7 @@
       std::vector<ExtraBallPowerUp> extraBallPowerUps{  };
       std::vector<VerticalDamagePowerUp> verticalDamagePowerUps{  };
       std::vector<HorizontalDamagePowerUp> horizontalDamagePowerUps{  };
+      std::vector<FlipperPowerUp> flipperPowerUps{  };
 
   };
 

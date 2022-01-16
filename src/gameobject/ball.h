@@ -2,6 +2,7 @@
 #define BALL_H
 
   #include "constants.h"
+  #include "random.h"
   #include <SFML/Graphics.hpp>
 
   class Ball {
@@ -15,6 +16,8 @@
 
       sf::Vector2f getPosition();
       sf::FloatRect getGlobalBounds();
+
+      void deflect();
 
     private:
       sf::Vector2f position{ 0, 0 };

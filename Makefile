@@ -19,11 +19,11 @@ GMOB = ./src/gameobject/
 # Project title (executable name)
 TITLE = Block_breaker
 
-OBJ = main.o game.o animatedsprite.o hitbox.o ray.o zoomableview.o button.o \
+OBJ = random.o main.o game.o animatedsprite.o hitbox.o ray.o zoomableview.o button.o \
 			checkbox.o guibar.o guitext.o nextstatebutton.o radiobutton.o \
 			radiobuttonarray.o scrollbar.o mainmenu.o game_state.o resourcemanager.o \
 			settingsmanager.o viewmanager.o ball.o wall.o balldeletor.o ballgenerator.o \
-			block.o blockgenerator.o extraballpowerup.o verticaldamagepowerup.o horizontaldamagepowerup.o
+			block.o blockgenerator.o extraballpowerup.o verticaldamagepowerup.o horizontaldamagepowerup.o flipperpowerup.o
 
 # Output rules
 output: $(OBJ)
@@ -160,13 +160,14 @@ ballgenerator.o: $(GMOB)ballgenerator.cpp $(GMOB)ballgenerator.h $(GMOB)ball.h \
 			-I$(GMOB) -I$(SRC) -I$(GUI) -I$(MNGR) -I$(UTIL)
 
 block.o: $(GMOB)block.cpp $(GMOB)block.h $(GMOB)ball.h $(SRC)constants.h \
-				 $(GUI)guitext.h
+				 $(GUI)guitext.h $(SRC)random.h
 	g++ -c $(GMOB)block.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMOB) -I$(SRC) -I$(GUI)
 
 blockgenerator.o: $(GMOB)blockgenerator.cpp $(GMOB)blockgenerator.h $(GMOB)block.h \
 								 	$(SRC)constants.h $(GMOB)ballgenerator.h $(MNGR)resourcemanager.h \
-									$(SRC)random.h $(GMOB)extraballpowerup.h $(GMOB)verticaldamagepowerup.h
+									$(SRC)random.h $(GMOB)extraballpowerup.h $(GMOB)verticaldamagepowerup.h \
+									$(GMOB)horizontaldamagepowerup.h $(GMOB)flipperpowerup.h
 	g++ -c $(GMOB)blockgenerator.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMOB) -I$(SRC) -I$(GUI) -I$(MNGR) -I$(UTIL) -I$(GUI)
 
@@ -184,3 +185,14 @@ horizontaldamagepowerup.o: $(GMOB)horizontaldamagepowerup.cpp $(GMOB)horizontald
 										$(GMOB)block.h $(GMOB)ballgenerator.h $(GMOB)blockgenerator.h
 	g++ -c $(GMOB)horizontaldamagepowerup.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMOB) -I$(SRC) -I$(UTIL) -I$(GUI) -I$(MNGR)
+
+flipperpowerup.o: $(GMOB)flipperpowerup.cpp $(GMOB)flipperpowerup.h \
+										$(GMOB)block.h $(GMOB)ballgenerator.h $(GMOB)blockgenerator.h
+	g++ -c $(GMOB)flipperpowerup.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
+			-I$(GMOB) -I$(SRC) -I$(UTIL) -I$(GUI) -I$(MNGR)
+
+
+
+random.o: $(SRC)random.cpp $(SRC)random.h
+	g++ -c $(SRC)random.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
+			-I$(SRC)
