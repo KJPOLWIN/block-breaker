@@ -110,6 +110,12 @@ void BallGenerator::setPosition(sf::Vector2f newPosition)
   ballsNumberText.setPosition(position + sf::Vector2f(-5, -50));
 }
 
+void BallGenerator::setPosition(double newPositionX)
+{
+  position = sf::Vector2f(newPositionX, position.y);
+  ballsNumberText.setPosition(position + sf::Vector2f(-5, -50));
+}
+
 sf::Vector2f BallGenerator::getPosition()
 {
   return position;

@@ -15,7 +15,7 @@
     private:
       sf::RectangleShape deletor{  };
       bool firstHit{ true };
-      sf::Vector2f generatorNewPosition{ 0, 0 };
+      double generatorNewPosition{ 0 }; //x coord
   };
 
 #endif

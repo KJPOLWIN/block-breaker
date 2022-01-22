@@ -29,6 +29,7 @@
     void addBall();
 
     void setPosition(sf::Vector2f newPosition);
+    void setPosition(double newPositionX);   //only x cood
     sf::Vector2f getPosition();
 
     Phase getPhase();

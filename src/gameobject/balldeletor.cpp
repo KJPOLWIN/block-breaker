@@ -37,7 +37,7 @@ void BallDeletor::checkForCollisions(BallGenerator& ballGenerator)
       {
         if(firstHit)
         {
-          generatorNewPosition = ball.getPosition();
+          generatorNewPosition = ball.getPosition().x;
           firstHit = false;
         }
 
@@ -45,9 +45,9 @@ void BallDeletor::checkForCollisions(BallGenerator& ballGenerator)
       }
     }
 
-    if(ballGenerator.getPhase() == Phase::Aiming && generatorNewPosition.x > 0)
+    if(ballGenerator.getPhase() == Phase::Aiming && generatorNewPosition > 0)
     {
       firstHit = true;
-      ballGenerator.setPosition(sf::Vector2f(generatorNewPosition.x, ballGenerator.getPosition().y));
+      ballGenerator.setPosition(generatorNewPosition);
     }
 }
