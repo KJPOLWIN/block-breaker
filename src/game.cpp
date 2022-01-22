@@ -2,7 +2,6 @@
 #include "resourcemanager.h"
 #include "guitext.h"
 #include "gamestate.h"
-#include "viewmanager.h"
 #include "settingsmanager.h"
 #include <SFML/Graphics.hpp>
 

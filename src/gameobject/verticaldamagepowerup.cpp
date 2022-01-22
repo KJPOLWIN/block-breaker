@@ -74,6 +74,7 @@ void VerticalDamagePowerUp::move()
   hitbox.setPosition(hitbox.getPosition()
                   + sf::Vector2f(0, constant::blockSize + constant::gapSize));
   sprite.setPosition(hitbox.getPosition() + sf::Vector2f(hitbox.getSize().x / 2, hitbox.getSize().y / 2));
+  ++position.y;
 }
 
 bool VerticalDamagePowerUp::isAlive()
