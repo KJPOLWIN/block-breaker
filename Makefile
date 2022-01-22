@@ -19,11 +19,14 @@ GMOB = ./src/gameobject/
 # Project title (executable name)
 TITLE = Block_breaker
 
-OBJ = random.o main.o game.o animatedsprite.o hitbox.o ray.o zoomableview.o button.o \
-			checkbox.o guibar.o guitext.o nextstatebutton.o radiobutton.o \
-			radiobuttonarray.o scrollbar.o mainmenu.o game_state.o resourcemanager.o \
-			settingsmanager.o viewmanager.o ball.o wall.o balldeletor.o ballgenerator.o \
-			block.o blockgenerator.o extraballpowerup.o verticaldamagepowerup.o horizontaldamagepowerup.o flipperpowerup.o
+OBJ = main.o game.o random.o \
+		  animatedsprite.o \
+			button.o guitext.o nextstatebutton.o \
+			mainmenu.o game_state.o \
+			resourcemanager.o settingsmanager.o \
+			ball.o wall.o balldeletor.o ballgenerator.o block.o blockgenerator.o \
+			extraballpowerup.o verticaldamagepowerup.o horizontaldamagepowerup.o \
+			flipperpowerup.o
 
 # Output rules
 output: $(OBJ)
@@ -55,37 +58,21 @@ game.o: $(SRC)game.cpp $(SRC)game.h $(GUI)guitext.h $(SRC)constants.h \
 	g++ -c $(SRC)game.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(SRC) -I$(GUI) -I$(GMST) -I$(UTIL) -I$(MNGR) -I$(GMOB)
 
+random.o: $(SRC)random.cpp $(SRC)random.h
+	g++ -c $(SRC)random.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
+			-I$(SRC)
+
 
 # Util classes
 animatedsprite.o: $(UTIL)animatedsprite.cpp $(UTIL)animatedsprite.h
 	g++ -c $(UTIL)animatedsprite.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(UTIL)
 
-hitbox.o: $(UTIL)hitbox.cpp $(UTIL)hitbox.h
-	g++ -c $(UTIL)hitbox.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) -I$(UTIL)
-
-ray.o: $(UTIL)ray.cpp $(UTIL)ray.h $(SRC)constants.h $(UTIL)hitbox.h
-	g++ -c $(UTIL)ray.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) -I$(UTIL) -I$(SRC)
-
-zoomableview.o: $(UTIL)zoomableview.cpp $(UTIL)zoomableview.h $(SRC)constants.h \
-								$(MNGR)settingsmanager.h
-	g++ -c $(UTIL)zoomableview.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(UTIL) -I$(SRC) -I$(MNGR)
-
-
 # GUI classes
 button.o: $(GUI)button.cpp $(GUI)button.h $(UTIL)animatedsprite.h \
 					$(GUI)guitext.h
 	g++ -c $(GUI)button.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GUI) -I$(UTIL)
-
-checkbox.o: $(GUI)checkbox.cpp $(GUI)checkbox.h $(UTIL)animatedsprite.h \
-						$(GUI)guitext.h
-	g++ -c $(GUI)checkbox.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(GUI) -I$(UTIL)
-
-guibar.o: $(GUI)guibar.cpp $(GUI)guibar.h
-	g++ -c $(GUI)guibar.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) -I$(GUI)
 
 guitext.o: $(GUI)guitext.cpp $(GUI)guitext.h
 	g++ -c $(GUI)guitext.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) -I$(GUI)
@@ -94,21 +81,6 @@ nextstatebutton.o: $(GUI)nextstatebutton.cpp $(GUI)nextstatebutton.h \
 									 $(UTIL)animatedsprite.h $(GUI)guitext.h $(SRC)gamestate.h
 	g++ -c $(GUI)nextstatebutton.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GUI) -I$(UTIL) -I$(SRC)
-
-radiobutton.o: $(GUI)radiobutton.cpp $(GUI)radiobutton.h $(UTIL)animatedsprite.h \
-							 $(GUI)guitext.h
-	g++ -c $(GUI)radiobutton.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(GUI) -I$(UTIL)
-
-radiobuttonarray.o: $(GUI)radiobuttonarray.cpp $(GUI)radiobuttonarray.h \
-										$(GUI)radiobutton.h
-	g++ -c $(GUI)radiobuttonarray.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(GUI) -I$(UTIL)
-
-scrollbar.o: $(GUI)scrollbar.cpp $(GUI)scrollbar.h $(UTIL)animatedsprite.h
-	g++ -c $(GUI)scrollbar.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(GUI) -I$(UTIL)
-
 
 # Gamestate classes
 mainmenu.o: $(GMST)mainmenu.cpp $(GMST)mainmenu.h $(GUI)guitext.h \
@@ -130,15 +102,9 @@ resourcemanager.o: $(MNGR)resourcemanager.cpp $(MNGR)resourcemanager.h \
 	g++ -c $(MNGR)resourcemanager.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(MNGR) -I$(UTIL)
 
-settingsmanager.o: $(MNGR)settingsmanager.cpp $(MNGR)settingsmanager.h \
-									 $(UTIL)keyboardcontrols.h
+settingsmanager.o: $(MNGR)settingsmanager.cpp $(MNGR)settingsmanager.h
 	g++ -c $(MNGR)settingsmanager.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(MNGR) -I$(UTIL)
-
-viewmanager.o: $(MNGR)viewmanager.cpp $(MNGR)viewmanager.h $(UTIL)zoomableview.h \
-							 $(SRC)constants.h
-	g++ -c $(MNGR)viewmanager.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(MNGR) -I$(UTIL) -I$(SRC)
 
 # Game object classes
 ball.o: $(GMOB)ball.cpp $(GMOB)ball.h $(SRC)constants.h
@@ -190,9 +156,3 @@ flipperpowerup.o: $(GMOB)flipperpowerup.cpp $(GMOB)flipperpowerup.h \
 										$(GMOB)block.h $(GMOB)ballgenerator.h $(GMOB)blockgenerator.h
 	g++ -c $(GMOB)flipperpowerup.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMOB) -I$(SRC) -I$(UTIL) -I$(GUI) -I$(MNGR)
-
-
-
-random.o: $(SRC)random.cpp $(SRC)random.h
-	g++ -c $(SRC)random.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
-			-I$(SRC)

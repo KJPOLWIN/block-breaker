@@ -42,19 +42,6 @@ void Game::gameLoop()
 		{
 			canClick = true;
 		}
-
-		//delete this to disable zoom
-		// if(event.type == sf::Event::MouseWheelScrolled)
-		// {
-		// 	if(event.mouseWheelScroll.delta > 0)
-		// 	{
-		// 		ViewManager::zoomDirection = -1;
-		// 	}
-		// 	else
-		// 	{
-		// 		ViewManager::zoomDirection = 1;
-		// 	}
-		// }
 	}
 
 	switch(gamestate)

@@ -6,7 +6,6 @@
 		MainMenu,
 		Game,
 		Exit
-		//Add ganestates here
 	};
 
 #endif

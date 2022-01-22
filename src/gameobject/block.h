@@ -28,7 +28,7 @@
     private:
       sf::RectangleShape block{  };
       bool wasHitInCurrentFrame{ false };
-      int hitPoints{ 30 };
+      int hitPoints{ 1 };
 
       guiText hitPointsText{  };
 

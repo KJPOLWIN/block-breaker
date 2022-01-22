@@ -26,7 +26,7 @@ void BallGenerator::update(double elapsedTime, sf::Vector2i mousePosition, bool 
   {
     nextLevelSignal = false;
     aimingLine.at(0).position = position;
-    //SFML won't let assing Vector2f to Vector2i
+    //SFML won't let to assign Vector2f to Vector2i
     aimingLine.at(1).position.x = mousePosition.x;
     aimingLine.at(1).position.y = mousePosition.y;
 

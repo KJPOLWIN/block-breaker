@@ -22,7 +22,6 @@
     private:
       sf::Vector2f position{ 0, 0 };
       sf::Vector2f velocity{ 0, 1.0f };
-      //double speed{ constant::ballSpeed };
 
       sf::CircleShape ball{ constant::ballRadius };
   };
