@@ -2,18 +2,20 @@
 #define WALL_H
 
   #include "ball.h"
+  #include "ballcollider.h"
   #include <SFML/Graphics.hpp>
 
-  class Wall
+  class Wall : public BallCollider
   {
     public:
-      Wall(sf::Vector2f size, sf::Vector2f position);
+      Wall(sf::Vector2f position, sf::Vector2f size);
 
-      void checkForCollisions(Ball& ball);
-      void draw(sf::RenderWindow& targetWindow);
+      void update(Ball& ball);
+      // void checkForCollisions(Ball& ball);
+      // void draw(sf::RenderWindow& targetWindow);
 
     private:
-      sf::RectangleShape wall{  };
+      // sf::RectangleShape wall{  };
   };
 
 #endif

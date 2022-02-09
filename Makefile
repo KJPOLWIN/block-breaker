@@ -26,7 +26,7 @@ OBJ = main.o game.o random.o \
 			resourcemanager.o settingsmanager.o \
 			ball.o wall.o balldeletor.o ballgenerator.o block.o blockgenerator.o \
 			extraballpowerup.o verticaldamagepowerup.o horizontaldamagepowerup.o \
-			flipperpowerup.o
+			flipperpowerup.o ballcollider.o
 
 # Output rules
 output: $(OBJ)
@@ -156,3 +156,7 @@ flipperpowerup.o: $(GMOB)flipperpowerup.cpp $(GMOB)flipperpowerup.h \
 										$(GMOB)block.h $(GMOB)ballgenerator.h $(GMOB)blockgenerator.h
 	g++ -c $(GMOB)flipperpowerup.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
 			-I$(GMOB) -I$(SRC) -I$(UTIL) -I$(GUI) -I$(MNGR)
+
+ballcollider.o: $(GMOB)ballcollider.cpp $(GMOB)ballcollider.h $(GMOB)ball.h
+	g++ -c $(GMOB)ballcollider.cpp -isystem $(SFMLINC) $(SFML) $(OPTIONS) \
+			-I$(GMOB) -I$(SRC)

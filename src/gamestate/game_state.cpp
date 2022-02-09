@@ -14,12 +14,12 @@
 
 Game_state::Game_state()
 {
-	walls.push_back(Wall(sf::Vector2f(constant::windowWidth, constant::wallThickness),
-											 sf::Vector2f(0, 0)));
-	walls.push_back(Wall(sf::Vector2f(constant::wallThickness, constant::windowHeight),
-											 sf::Vector2f(0, 0)));
-	walls.push_back(Wall(sf::Vector2f(constant::wallThickness, constant::windowHeight),
-											 sf::Vector2f(constant::windowWidth - constant::wallThickness, 0)));
+	walls.push_back(Wall(sf::Vector2f(0, 0),
+											 sf::Vector2f(constant::windowWidth, constant::wallThickness)));
+	walls.push_back(Wall(sf::Vector2f(0, 0),
+											 sf::Vector2f(constant::wallThickness, constant::windowHeight)));
+	walls.push_back(Wall(sf::Vector2f(constant::windowWidth - constant::wallThickness, 0),
+											 sf::Vector2f(constant::wallThickness, constant::windowHeight)));
 }
 
 void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
@@ -57,7 +57,7 @@ void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
 	{
 		for( auto& ball : generator.getBalls() )
 		{
-			wall.checkForCollisions(ball);
+			wall.update(ball);
 		}
 	}
 
