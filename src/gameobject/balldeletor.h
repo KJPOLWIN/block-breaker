@@ -1,19 +1,20 @@
 #ifndef BALLDELETOR_H
 #define BALLDELETOR_H
 
+  #include "ballcollider.h"
   #include "ball.h"
   #include "ballgenerator.h"
   #include <SFML/Graphics.hpp>
 
-  class BallDeletor
+  class BallDeletor : public BallCollider
   {
     public:
-      BallDeletor(sf::Vector2f size, sf::Vector2f position);
+      BallDeletor(sf::Vector2f position, sf::Vector2f size);
 
-      void checkForCollisions(BallGenerator& ballGenerator);
+      void update(BallGenerator& ballGenerator);
 
     private:
-      sf::RectangleShape deletor{  };
+      //sf::RectangleShape deletor{  };
       bool firstHit{ true };
       double generatorNewPosition{ 0 }; //x coord
   };

@@ -63,7 +63,7 @@ void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
 
 	blocks.update(generator, generator.getNextLevelSignal(), level);
 
-	deletor.checkForCollisions(generator);
+	deletor.update(generator);
 
 	generator.update(elapsedTime, mousePosition, clicked);
 

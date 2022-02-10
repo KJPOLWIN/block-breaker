@@ -36,20 +36,20 @@
 			std::vector<Wall> walls{  };
 			BlockGenerator blocks{  };
 			BallDeletor deletor{
-													 sf::Vector2f(constant::windowWidth,
-														 						constant::wallThickness),
-													 sf::Vector2f(0, constant::windowHeight)
+													 sf::Vector2f(0, constant::windowHeight),
+                           sf::Vector2f(constant::windowWidth,
+														 						constant::wallThickness)
 												 };
 
 			int level{ 1 };
 
 			guiText levelText{
-	                             ResourceManager::arial,
-	                             "",
-	                             sf::Color::Red,
-	                             50,
-	                             sf::Vector2f(constant::windowWidth - 200.f, 50.0f)
-	                           };
+	                       ResourceManager::arial,
+	                       "",
+	                       sf::Color::Red,
+	                       50,
+	                       sf::Vector2f(constant::windowWidth - 200.f, 50.0f)
+	                     };
 	};
 
 #endif
