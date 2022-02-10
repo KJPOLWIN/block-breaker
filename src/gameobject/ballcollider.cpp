@@ -43,6 +43,11 @@ sf::Vector2f BallCollider::getPosition()
   return hitbox.getPosition();
 }
 
+void BallCollider::setPosition(sf::Vector2f newPosition)
+{
+  hitbox.setPosition(newPosition);
+}
+
 sf::Vector2f BallCollider::getSize()
 {
   return hitbox.getSize();

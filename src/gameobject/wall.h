@@ -11,11 +11,9 @@
       Wall(sf::Vector2f position, sf::Vector2f size);
 
       void update(Ball& ball);
-      // void checkForCollisions(Ball& ball);
-      // void draw(sf::RenderWindow& targetWindow);
 
     private:
-      // sf::RectangleShape wall{  };
+
   };
 
 #endif

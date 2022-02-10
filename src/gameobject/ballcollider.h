@@ -14,6 +14,8 @@
       void draw(sf::RenderWindow& targetWindow);
 
       sf::Vector2f getPosition();
+      void setPosition(sf::Vector2f newPosition);
+
       sf::Vector2f getSize();
 
     private:

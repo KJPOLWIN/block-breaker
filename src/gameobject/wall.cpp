@@ -34,8 +34,3 @@ void Wall::update(Ball& ball)
     }
   }
 }
-
-// void Wall::draw(sf::RenderWindow& targetWindow)
-// {
-//   targetWindow.draw(wall);
-// }
