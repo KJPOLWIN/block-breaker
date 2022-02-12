@@ -1,31 +1,32 @@
 #ifndef FLIPPER_POWER_UP_H
 #define FLIPPER_POWER_UP_H
 
+  #include "powerup.h"
   #include "animatedsprite.h"
   #include "ballgenerator.h"
   #include "ball.h"
   #include <SFML/Graphics.hpp>
 
-  class FlipperPowerUp
+  class FlipperPowerUp : public PowerUp
   {
     public:
-      FlipperPowerUp(AnimatedSprite sprite, sf::Vector2f size, sf::Vector2f position);
+      FlipperPowerUp(AnimatedSprite sprite, sf::Vector2f position, sf::Vector2f size);
 
       void update(BallGenerator& generator);
-      bool checkForCollisions(Ball& ball);
-      void draw(sf::RenderWindow& window);
+      // bool checkForCollisions(Ball& ball);
+      // void draw(sf::RenderWindow& window);
 
-      void move();
+      // void move();
 
-      bool isAlive();
+      // bool isAlive();
 
 
-          sf::Vector2f getPosition();
+          // sf::Vector2f getPosition();
 
     private:
-      AnimatedSprite sprite{  };
-      sf::RectangleShape hitbox{  };
-      bool alive{ true };
+      // AnimatedSprite sprite{  };
+      // sf::RectangleShape hitbox{  };
+      // bool alive{ true };
   };
 
 #endif

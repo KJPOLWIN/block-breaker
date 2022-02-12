@@ -16,9 +16,11 @@
 
       bool isAlive();
 
+    protected:
+      bool alive{ true };
+
     private:
       AnimatedSprite sprite{  };
-      bool alive{ true };
   };
 
 #endif

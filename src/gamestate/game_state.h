@@ -25,7 +25,7 @@
 							 GameState& gamestate);
 
 		private:
-			BallGenerator generator{
+			BallGenerator ballGenerator{
 															 sf::Vector2f(constant::windowWidth * 0.5,
 																					  constant::windowHeight
 																				  - constant::wallThickness
@@ -34,7 +34,7 @@
 														 };
 
 			std::vector<Wall> walls{  };
-			BlockGenerator blocks{  };
+			//BlockGenerator blockGenerator{  };
 			BallDeletor deletor{
 													 sf::Vector2f(0, constant::windowHeight),
                            sf::Vector2f(constant::windowWidth,

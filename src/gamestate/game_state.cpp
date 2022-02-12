@@ -41,33 +41,33 @@ void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
 	}
 
 	//Updating everything
-	if(blocks.blocksInLastRow())
-	{
-		blocks.reset();
-		generator.reset();
-		level = 1;
-		generator.setPosition( sf::Vector2f(constant::windowWidth * 0.5,
-																				constant::windowHeight
-																				- constant::wallThickness
-																				- constant::ballRadius - 10.0f));
-		gamestate = GameState::MainMenu;
-	}
+	// if(blockGenerator.blocksInLastRow())
+	// {
+	// 	blockGenerator.reset();
+	// 	ballGenerator.reset();
+	// 	level = 1;
+	// 	ballGenerator.setPosition( sf::Vector2f(constant::windowWidth * 0.5,
+	// 																			constant::windowHeight
+	// 																			- constant::wallThickness
+	// 																			- constant::ballRadius - 10.0f));
+	// 	gamestate = GameState::MainMenu;
+	// }
 
 	for( auto& wall : walls )
 	{
-		for( auto& ball : generator.getBalls() )
+		for( auto& ball : ballGenerator.getBalls() )
 		{
 			wall.update(ball);
 		}
 	}
 
-	blocks.update(generator, generator.getNextLevelSignal(), level);
+	// blockGenerator.update(ballGenerator, ballGenerator.getNextLevelSignal(), level);
 
-	deletor.update(generator);
+	deletor.update(ballGenerator);
 
-	generator.update(elapsedTime, mousePosition, clicked);
+	ballGenerator.update(elapsedTime, mousePosition, clicked);
 
-	if(generator.getNextLevelSignal())
+	if(ballGenerator.getNextLevelSignal())
 	{
 		++level;
 	}
@@ -79,7 +79,7 @@ void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
 	//Drawing everything
 	window.clear(sf::Color::Black);
 
-	generator.draw(window);
+	ballGenerator.draw(window);
 
 	for( auto& wall : walls )
 	{
@@ -87,7 +87,7 @@ void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
 	}
 
 
-	blocks.draw(window);
+	// blockGenerator.draw(window);
 
 	if(SettingsManager::showFPSCounter)
 	{
