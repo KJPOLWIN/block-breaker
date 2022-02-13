@@ -8,6 +8,8 @@
   {
     double getRandomDouble(double min, double max);
     int getRandomInt(int min, int max);
+
+    bool drawStraws(int numberOfStraws);
   }
 
 #endif

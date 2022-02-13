@@ -60,9 +60,9 @@ void BlockGenerator::generateRow(int level)
 
       if(random == 1 && blocksToAdd > 0)
       {
-        blocks.push_back(Block(sf::Vector2f(constant::blockSize, constant::blockSize),
-      											 	 sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+        blocks.push_back(Block(sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
                                             constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                               sf::Vector2f(constant::blockSize, constant::blockSize),
       												 ResourceManager::arial,
       									       sf::Color::Red,
       												 25,
@@ -79,40 +79,40 @@ void BlockGenerator::generateRow(int level)
           {
             extraBallPowerUps.push_back(
               ExtraBallPowerUp(ResourceManager::extraBall,
-                             sf::Vector2f(constant::blockSize, constant::blockSize),
                              sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
-                                          constant::wallThickness + 2 * constant::gapSize + constant::blockSize))
-                                        );
+                                          constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                            sf::Vector2f(constant::blockSize, constant::blockSize)
+                          ));
             --powerUpsToAdd;
           }
           else if(random == 2)
           {
             verticalDamagePowerUps.push_back(
               VerticalDamagePowerUp(ResourceManager::verticalDamage,
-                             sf::Vector2f(constant::blockSize, constant::blockSize),
                              sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
-                                          constant::wallThickness + 2 * constant::gapSize + constant::blockSize))
-                                        );
+                                          constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                                    sf::Vector2f(constant::blockSize, constant::blockSize)
+                                  ));
             --powerUpsToAdd;
           }
           else if(random == 3)
           {
             horizontalDamagePowerUps.push_back(
               HorizontalDamagePowerUp(ResourceManager::horizontalDamage,
-                             sf::Vector2f(constant::blockSize, constant::blockSize),
                              sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
-                                          constant::wallThickness + 2 * constant::gapSize + constant::blockSize))
-                                        );
+                                          constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                                          sf::Vector2f(constant::blockSize, constant::blockSize)
+                                        ));
             --powerUpsToAdd;
           }
           else
           {
             flipperPowerUps.push_back(
               FlipperPowerUp(ResourceManager::flipper,
-                             sf::Vector2f(constant::blockSize, constant::blockSize),
                              sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
-                                          constant::wallThickness + 2 * constant::gapSize + constant::blockSize))
-                                        );
+                                          constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                                          sf::Vector2f(constant::blockSize, constant::blockSize)
+                                        ));
             --powerUpsToAdd;
           }
         }
@@ -120,19 +120,19 @@ void BlockGenerator::generateRow(int level)
         {
           extraBallPowerUps.push_back(
             ExtraBallPowerUp(ResourceManager::extraBall,
-                           sf::Vector2f(constant::blockSize, constant::blockSize),
                            sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
-                                        constant::wallThickness + 2 * constant::gapSize + constant::blockSize))
-                                      );
+                                        constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                                        sf::Vector2f(constant::blockSize, constant::blockSize)
+                                      ));
           --powerUpsToAdd;
         }
       }
     }
     else if(blocksToAdd > 0)
     {
-      blocks.push_back(Block(sf::Vector2f(constant::blockSize, constant::blockSize),
-    											 	 sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+      blocks.push_back(Block(sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
                                           constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                                          sf::Vector2f(constant::blockSize, constant::blockSize),
     												 ResourceManager::arial,
     									       sf::Color::Red,
     												 25,
@@ -166,6 +166,65 @@ void BlockGenerator::generateRow(int level)
 
 void BlockGenerator::update(BallGenerator& generator, bool nextLevelSignal, int level)
 {
+  for( auto& extraBallPowerUp : extraBallPowerUps )
+  {
+    extraBallPowerUp.update(generator);
+  }
+
+  //this algorithm ensures that vector doesn't get displaced
+  //when elements are deleted, in which case crashes may happen
+
+  bool notAnyObjectDeleted{ false };
+  while(!notAnyObjectDeleted)
+  {
+    notAnyObjectDeleted = true;
+    for(int iii{ 0 }; iii < extraBallPowerUps.size() - 1; ++iii)
+    {
+      if(!extraBallPowerUps.at(iii).isAlive())
+      {
+        extraBallPowerUps.erase(extraBallPowerUps.begin() + iii);
+        notAnyObjectDeleted = false;
+        break;
+      }
+    }
+  }
+
+  // for(std::size_t iii{ 0 }; iii < extraBallPowerUps.size(); ++iii)
+	// {
+  //   if(!extraBallPowerUps.at(iii).isAlive())
+  //   {
+  //     extraBallPowerUps.erase(extraBallPowerUps.begin() + iii);
+  //   }
+	// }
+
+  for(std::size_t iii{ 0 }; iii < blocks.size(); ++iii)
+	{
+		for( auto& ball : generator.getBalls() )
+		{
+			blocks.at(iii).update(ball);
+		}
+
+		if(!blocks.at(iii).isAlive())
+		{
+			blocks.erase(blocks.begin() + iii);
+		}
+	}
+
+  for( auto& verticalDamagePowerUp : verticalDamagePowerUps )
+  {
+    verticalDamagePowerUp.update(generator, blocks);
+  }
+
+  for( auto& horizontalDamagePowerUp : horizontalDamagePowerUps )
+  {
+    horizontalDamagePowerUp.update(generator, blocks);
+  }
+
+  for( auto& flipperPowerUp : flipperPowerUps )
+  {
+    flipperPowerUp.update(generator);
+  }
+
   if(nextLevelSignal)
   {
     generateRow(level);
@@ -194,44 +253,6 @@ void BlockGenerator::update(BallGenerator& generator, bool nextLevelSignal, int 
   		}
   	}
   }
-
-  for(std::size_t iii{ 0 }; iii < blocks.size(); ++iii)
-	{
-		for( auto& ball : generator.getBalls() )
-		{
-			blocks.at(iii).checkForCollisions(ball);
-		}
-
-		if(!blocks.at(iii).isAlive())
-		{
-			blocks.erase(blocks.begin() + iii);
-		}
-	}
-
-  for( auto& verticalDamagePowerUp : verticalDamagePowerUps )
-  {
-    verticalDamagePowerUp.update(generator, blocks);
-  }
-
-  for( auto& horizontalDamagePowerUp : horizontalDamagePowerUps )
-  {
-    horizontalDamagePowerUp.update(generator, blocks);
-  }
-
-  for( auto& flipperPowerUp : flipperPowerUps )
-  {
-    flipperPowerUp.update(generator);
-  }
-
-  for(std::size_t iii{ 0 }; iii < extraBallPowerUps.size(); ++iii)
-	{
-    extraBallPowerUps.at(iii).update(generator);
-
-    if(!extraBallPowerUps.at(iii).isAlive())
-    {
-      extraBallPowerUps.erase(extraBallPowerUps.begin() + iii);
-    }
-	}
 }
 
 void BlockGenerator::draw(sf::RenderWindow& targetWindow)

@@ -13,6 +13,7 @@
       ExtraBallPowerUp(AnimatedSprite sprite, sf::Vector2f position, sf::Vector2f size);
 
       void update(BallGenerator& generator);
+      void draw(sf::RenderWindow& targetWindow);
 
     private:
 

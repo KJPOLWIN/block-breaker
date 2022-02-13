@@ -16,10 +16,7 @@ PowerUp::PowerUp(AnimatedSprite sprite, sf::Vector2f position, sf::Vector2f size
 
 void PowerUp::draw(sf::RenderWindow& window)
 {
-  if(alive)
-  {
-    sprite.draw(&window);
-  }
+  sprite.draw(&window);
 }
 
 void PowerUp::move()

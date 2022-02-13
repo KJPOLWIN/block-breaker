@@ -24,3 +24,11 @@ void ExtraBallPowerUp::update(BallGenerator& generator)
     }
   }
 }
+
+void ExtraBallPowerUp::draw(sf::RenderWindow& targetWindow)
+{
+  if(alive)
+  {
+    PowerUp::draw(targetWindow);
+  }
+}

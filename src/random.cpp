@@ -17,4 +17,9 @@ namespace Random
     std::uniform_int_distribution dist{ min, max };
     return dist(mersenne);
   }
+
+  bool drawStraws(int numberOfStraws)
+  {
+    return getRandomInt(1, numberOfStraws) == 1;
+  }
 }

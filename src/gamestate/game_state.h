@@ -38,12 +38,12 @@
 														 };
 
 			std::vector<Wall> walls{  };
-			//BlockGenerator blockGenerator{  };
-      std::vector<Block> blocksDebug{  };
-      std::vector<ExtraBallPowerUp> xtrBallPowupsDebug{  };
-      std::vector<HorizontalDamagePowerUp> horDamPowupsDebug{  };
-      std::vector<VerticalDamagePowerUp> verDamPowupsDebug{  };
-      std::vector<FlipperPowerUp> flipDamPowupsDebug{  };
+			BlockGenerator blockGenerator{  };
+      // std::vector<Block> blocksDebug{  };
+      // std::vector<ExtraBallPowerUp> xtrBallPowupsDebug{  };
+      // std::vector<HorizontalDamagePowerUp> horDamPowupsDebug{  };
+      // std::vector<VerticalDamagePowerUp> verDamPowupsDebug{  };
+      // std::vector<FlipperPowerUp> flipDamPowupsDebug{  };
 
 			BallDeletor deletor{
 													 sf::Vector2f(0, constant::windowHeight),
@@ -66,11 +66,11 @@
 
 
       //DEBUG
-      void blocksDemo();
-      void xtrBallPowupDemo();
-      void horDamPowupDemo();
-      void verDamPowupDemo();
-      void flipPowupDemo();
+      // void blocksDemo();
+      // void xtrBallPowupDemo();
+      // void horDamPowupDemo();
+      // void verDamPowupDemo();
+      // void flipPowupDemo();
 	};
 
 #endif
