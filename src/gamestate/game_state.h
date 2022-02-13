@@ -9,6 +9,10 @@
 	#include "balldeletor.h"
 	#include "ballgenerator.h"
 	#include "guitext.h"
+  #include "extraballpowerup.h"
+  #include "verticaldamagepowerup.h"
+  #include "horizontaldamagepowerup.h"
+  #include "flipperpowerup.h"
 	#include "resourcemanager.h"
 	#include "blockgenerator.h"
 	#include "constants.h"
@@ -30,11 +34,17 @@
 																					  constant::windowHeight
 																				  - constant::wallThickness
 																			    - constant::ballRadius - 10.0f),
-													     0.2
+													     0.1
 														 };
 
 			std::vector<Wall> walls{  };
 			//BlockGenerator blockGenerator{  };
+      std::vector<Block> blocksDebug{  };
+      std::vector<ExtraBallPowerUp> xtrBallPowupsDebug{  };
+      std::vector<HorizontalDamagePowerUp> horDamPowupsDebug{  };
+      std::vector<VerticalDamagePowerUp> verDamPowupsDebug{  };
+      std::vector<FlipperPowerUp> flipDamPowupsDebug{  };
+
 			BallDeletor deletor{
 													 sf::Vector2f(0, constant::windowHeight),
                            sf::Vector2f(constant::windowWidth,
@@ -50,6 +60,17 @@
 	                       50,
 	                       sf::Vector2f(constant::windowWidth - 200.f, 50.0f)
 	                     };
+
+
+
+
+
+      //DEBUG
+      void blocksDemo();
+      void xtrBallPowupDemo();
+      void horDamPowupDemo();
+      void verDamPowupDemo();
+      void flipPowupDemo();
 	};
 
 #endif

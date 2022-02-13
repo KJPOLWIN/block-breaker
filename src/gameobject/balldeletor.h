@@ -14,7 +14,6 @@
       void update(BallGenerator& ballGenerator);
 
     private:
-      //sf::RectangleShape deletor{  };
       bool firstHit{ true };
       double generatorNewPosition{ 0 }; //x coord
   };

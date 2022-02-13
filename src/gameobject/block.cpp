@@ -48,7 +48,7 @@ void Block::update(Ball& ball)
 
 void Block::draw(sf::RenderWindow& targetWindow)
 {
-  this->draw(targetWindow);
+  BallCollider::draw(targetWindow);
   hitPointsText.draw(&targetWindow);
 }
 

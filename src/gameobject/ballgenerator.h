@@ -47,7 +47,7 @@
     double maxCooldown{ 0.0 };
 
     int maxBallsNumber{ 1 };
-    int ballsNumber{ 1 };
+    int ballsNumber{ 100 };
 
     std::vector<sf::Vertex> aimingLine{  };
     Phase phase{ Phase::Aiming };

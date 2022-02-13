@@ -2,6 +2,7 @@
 #include "constants.h"
 #include "random.h"
 #include <SFML/Graphics.hpp>
+#include <cmath>
 
 Ball::Ball(sf::Vector2f initialPosition, double speed, sf::Vector2f direction)
   : position{ initialPosition },
@@ -48,5 +49,10 @@ sf::FloatRect Ball::getGlobalBounds()
 
 void Ball::deflect()
 {
-  velocity.x = Random::getRandomDouble(-1.0, 1.0) * constant::ballSpeed;
+  //1.5 gives more "randomized" results than 1.0, and vector is normalized anyway
+  velocity.x = Random::getRandomDouble(-1.5, 1.5) * constant::ballSpeed;
+
+  double length{ sqrt(pow(velocity.x, 2) + pow(velocity.y, 2)) };
+  velocity.x = (velocity.x / length) * constant::ballSpeed;
+  velocity.y = (velocity.y / length) * constant::ballSpeed;
 }

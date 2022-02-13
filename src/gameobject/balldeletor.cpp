@@ -4,7 +4,7 @@
 #include "ballgenerator.h"
 #include <SFML/Graphics.hpp>
 
-BallDeletor::BallDeletor(sf::Vector2f size, sf::Vector2f position)
+BallDeletor::BallDeletor(sf::Vector2f position, sf::Vector2f size)
   : BallCollider(position, size)
 {
 
