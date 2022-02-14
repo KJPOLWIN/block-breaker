@@ -7,7 +7,7 @@
 
 HorizontalDamagePowerUp::HorizontalDamagePowerUp(AnimatedSprite sprite, sf::Vector2f position, sf::Vector2f size)
   : PowerUp(sprite, position, size),
-    position{ sf::Vector2i((position.x - constant::wallThickness - constant::gapSize) / (constant::blockSize + constant::gapSize),
+    gridPosition{ sf::Vector2i((position.x - constant::wallThickness - constant::gapSize) / (constant::blockSize + constant::gapSize),
                     (position.y - constant::wallThickness - constant::gapSize) / (constant::blockSize + constant::gapSize)) }
 {
 
@@ -30,7 +30,7 @@ void HorizontalDamagePowerUp::update(BallGenerator& generator, std::vector<Block
     alive = false;
     for( auto& block : blocks )
     {
-      if(block.getRow() == position.y)
+      if(block.getRow() == gridPosition.y)
       {
         block.decreaseHealth(collidedBalls - oldCollidedBalls);
       }
@@ -42,6 +42,6 @@ void HorizontalDamagePowerUp::update(BallGenerator& generator, std::vector<Block
 
 void HorizontalDamagePowerUp::move()
 {
-  ++position.y;
+  ++gridPosition.y;
   PowerUp::move();
 }

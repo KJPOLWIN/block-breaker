@@ -19,7 +19,7 @@
     private:
       int oldCollidedBalls{ 0 };
 
-      sf::Vector2i position{  };  //Position in grid, not in xy coordinates
+      sf::Vector2i gridPosition{  };
   };
 
 #endif
