@@ -11,7 +11,7 @@ Block::Block(sf::Vector2f position, sf::Vector2f size, sf::Font &font,
     hitPoints{ hitPoints },
     hitPointsText{ font, std::to_string(hitPoints), textColor, textSize,
                    position + sf::Vector2f(1.0f, 1.0f) },
-    position{ sf::Vector2i((position.x - constant::wallThickness - constant::gapSize) / (constant::blockSize + constant::gapSize),
+    gridPosition{ sf::Vector2i((position.x - constant::wallThickness - constant::gapSize) / (constant::blockSize + constant::gapSize),
                            (position.y - constant::wallThickness - constant::gapSize) / (constant::blockSize + constant::gapSize)) }
 {
   this->setColor(sf::Color::Yellow);
@@ -69,15 +69,15 @@ void Block::move()
   this->setPosition(this->getPosition()
                   + sf::Vector2f(0, constant::blockSize + constant::gapSize));
   hitPointsText.setPosition(this->getPosition() + sf::Vector2f(1.0f, 1.0f));
-  ++position.y;
+  ++gridPosition.y;
 }
 
 int Block::getRow()
 {
-  return position.y;
+  return gridPosition.y;
 }
 
 int Block::getColumn()
 {
-  return position.x;
+  return gridPosition.x;
 }

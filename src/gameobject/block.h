@@ -31,7 +31,7 @@
 
       guiText hitPointsText{  };
 
-      sf::Vector2i position{  };  //Position in grid, not in xy coordinates
+      sf::Vector2i gridPosition{  };  //Position in grid, not in xy coordinates
   };
 
 #endif
