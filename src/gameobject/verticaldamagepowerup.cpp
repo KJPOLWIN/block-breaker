@@ -39,3 +39,9 @@ void VerticalDamagePowerUp::update(BallGenerator& generator, std::vector<Block>&
 
   oldCollidedBalls = collidedBalls;
 }
+
+void VerticalDamagePowerUp::move()
+{
+  ++position.y;
+  PowerUp::move();
+}

@@ -39,3 +39,9 @@ void HorizontalDamagePowerUp::update(BallGenerator& generator, std::vector<Block
 
   oldCollidedBalls = collidedBalls;
 }
+
+void HorizontalDamagePowerUp::move()
+{
+  ++position.y;
+  PowerUp::move();
+}

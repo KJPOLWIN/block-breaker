@@ -14,6 +14,7 @@
       HorizontalDamagePowerUp(AnimatedSprite sprite, sf::Vector2f position, sf::Vector2f size);
 
       void update(BallGenerator& generator, std::vector<Block>& blocks);
+      void move();
 
     private:
       int oldCollidedBalls{ 0 };
