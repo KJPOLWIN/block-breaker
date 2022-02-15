@@ -260,7 +260,7 @@ void Game_state::run(double& elapsedTime, sf::Vector2i& mousePosition,
   fpsCounter.update(std::to_string(static_cast<int>(1 / elapsedTime)));
 
 	//Drawing everything
-	window.clear(sf::Color::Black);
+	window.clear(constant::backgroundColor);
 
 	ballGenerator.draw(window);
 

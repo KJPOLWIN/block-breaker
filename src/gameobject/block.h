@@ -10,8 +10,8 @@
   class Block : public BallCollider
   {
     public:
-      Block(sf::Vector2f position, sf::Vector2f size, sf::Font &font,
-            sf::Color textColor, unsigned int textSize, int hitPoints);
+      Block(sf::Vector2f position, sf::Vector2f size, sf::Font &textFont,
+            unsigned int textSize, int hitPoints);
 
       void update(Ball& ball);
       void draw(sf::RenderWindow& targetWindow);

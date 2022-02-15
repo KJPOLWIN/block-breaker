@@ -5,16 +5,16 @@
 
     #include <iostream>
 
-Block::Block(sf::Vector2f position, sf::Vector2f size, sf::Font &font,
-             sf::Color textColor, unsigned int textSize, int hitPoints)
+Block::Block(sf::Vector2f position, sf::Vector2f size, sf::Font &textFont,
+             unsigned int textSize, int hitPoints)
   : BallCollider(position, size),
     hitPoints{ hitPoints },
-    hitPointsText{ font, std::to_string(hitPoints), textColor, textSize,
+    hitPointsText{ textFont, std::to_string(hitPoints), constant::textColor, textSize,
                    position + sf::Vector2f(1.0f, 1.0f) },
     gridPosition{ sf::Vector2i((position.x - constant::wallThickness - constant::gapSize) / (constant::blockSize + constant::gapSize),
                            (position.y - constant::wallThickness - constant::gapSize) / (constant::blockSize + constant::gapSize)) }
 {
-  this->setColor(sf::Color::Yellow);
+  this->setColor(constant::blockColor);
 }
 
 void Block::update(Ball& ball)

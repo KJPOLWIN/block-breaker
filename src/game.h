@@ -34,7 +34,7 @@
 			//FPS counter
 			guiText fpsCounter{ ResourceManager::arial,
 													"",
-													constant::fpsCounterColor,
+													constant::textColor,
 													50,
 													sf::Vector2f(50, 50) };
 

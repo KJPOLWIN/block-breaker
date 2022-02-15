@@ -30,7 +30,7 @@ void MainMenu::run(double& elapsedTime, sf::Vector2i& mousePosition, bool& canCl
 	fpsCounter.update(std::to_string(static_cast<int>(1 / elapsedTime)));
 
 	//Drawing everything
-	window.clear(sf::Color::Black);
+	window.clear(constant::backgroundColor);
 
 	startButton.draw(&window);
 

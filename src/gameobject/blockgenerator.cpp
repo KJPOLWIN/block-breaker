@@ -44,102 +44,107 @@ void BlockGenerator::generateRow(int level)
     flipperPowerUp.move();
   }
 
-  int blocksToAdd{ Random::getRandomInt(1, constant::blocksInRow - 1) };
-  int powerUpsToAdd{ Random::getRandomInt(1, constant::blocksInRow - 1 - blocksToAdd) };
+  blocks.push_back(Block(sf::Vector2f(constant::wallThickness + 2 * constant::gapSize + 1 * constant::blockSize,
+                                      constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                         sf::Vector2f(constant::blockSize, constant::blockSize),
+      									 ResourceManager::arial,
+      									 25,
+                         level));
 
-  for(int iii{ 0 }; iii < constant::blocksInRow; ++iii)
-  {
-    if(blocksToAdd == 0 && powerUpsToAdd == 0) break;
-
-    if(constant::blocksInRow - iii > blocksToAdd)
-    {
-      //If dice below has too many sides, all blocks will generate on right side.
-      //If it has too few sides, all blocks will generate on left side
-      //Choose some number and test it
-      int random{ Random::getRandomInt(1, 2) };
-
-      if(random == 1 && blocksToAdd > 0)
-      {
-        blocks.push_back(Block(sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
-                                            constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
-                               sf::Vector2f(constant::blockSize, constant::blockSize),
-      												 ResourceManager::arial,
-      									       sf::Color::Red,
-      												 25,
-                               level));
-        --blocksToAdd;
-      }
-      else if(powerUpsToAdd > 0)
-      {
-        if(constant::blocksInRow - iii - blocksToAdd > 1)
-        {
-          random = Random::getRandomInt(1, 4);
-
-          if(random == 1)
-          {
-            extraBallPowerUps.push_back(
-              ExtraBallPowerUp(ResourceManager::extraBall,
-                             sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
-                                          constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
-                            sf::Vector2f(constant::blockSize, constant::blockSize)
-                          ));
-            --powerUpsToAdd;
-          }
-          else if(random == 2)
-          {
-            verticalDamagePowerUps.push_back(
-              VerticalDamagePowerUp(ResourceManager::verticalDamage,
-                             sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
-                                          constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
-                                    sf::Vector2f(constant::blockSize, constant::blockSize)
-                                  ));
-            --powerUpsToAdd;
-          }
-          else if(random == 3)
-          {
-            horizontalDamagePowerUps.push_back(
-              HorizontalDamagePowerUp(ResourceManager::horizontalDamage,
-                             sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
-                                          constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
-                                          sf::Vector2f(constant::blockSize, constant::blockSize)
-                                        ));
-            --powerUpsToAdd;
-          }
-          else
-          {
-            flipperPowerUps.push_back(
-              FlipperPowerUp(ResourceManager::flipper,
-                             sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
-                                          constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
-                                          sf::Vector2f(constant::blockSize, constant::blockSize)
-                                        ));
-            --powerUpsToAdd;
-          }
-        }
-        else
-        {
-          extraBallPowerUps.push_back(
-            ExtraBallPowerUp(ResourceManager::extraBall,
-                           sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
-                                        constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
-                                        sf::Vector2f(constant::blockSize, constant::blockSize)
-                                      ));
-          --powerUpsToAdd;
-        }
-      }
-    }
-    else if(blocksToAdd > 0)
-    {
-      blocks.push_back(Block(sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
-                                          constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
-                                          sf::Vector2f(constant::blockSize, constant::blockSize),
-    												 ResourceManager::arial,
-    									       sf::Color::Red,
-    												 25,
-                             level));
-      --blocksToAdd;
-    }
-  }
+  // int blocksToAdd{ Random::getRandomInt(1, constant::blocksInRow - 1) };
+  // int powerUpsToAdd{ Random::getRandomInt(1, constant::blocksInRow - 1 - blocksToAdd) };
+  //
+  // for(int iii{ 0 }; iii < constant::blocksInRow; ++iii)
+  // {
+  //   if(blocksToAdd == 0 && powerUpsToAdd == 0) break;
+  //
+  //   if(constant::blocksInRow - iii > blocksToAdd)
+  //   {
+  //     //If dice below has too many sides, all blocks will generate on right side.
+  //     //If it has too few sides, all blocks will generate on left side
+  //     //Choose some number and test it
+  //     int random{ Random::getRandomInt(1, 2) };
+  //
+  //     if(random == 1 && blocksToAdd > 0)
+  //     {
+  //       blocks.push_back(Block(sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+  //                                           constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+  //                              sf::Vector2f(constant::blockSize, constant::blockSize),
+  //     												 ResourceManager::arial,
+  //     												 25,
+  //                              level));
+  //       --blocksToAdd;
+  //     }
+  //     else if(powerUpsToAdd > 0)
+  //     {
+  //       if(constant::blocksInRow - iii - blocksToAdd > 1)
+  //       {
+  //         random = Random::getRandomInt(1, 4);
+  //
+  //         if(random == 1)
+  //         {
+  //           extraBallPowerUps.push_back(
+  //             ExtraBallPowerUp(ResourceManager::extraBall,
+  //                            sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+  //                                         constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+  //                           sf::Vector2f(constant::blockSize, constant::blockSize)
+  //                         ));
+  //           --powerUpsToAdd;
+  //         }
+  //         else if(random == 2)
+  //         {
+  //           verticalDamagePowerUps.push_back(
+  //             VerticalDamagePowerUp(ResourceManager::verticalDamage,
+  //                            sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+  //                                         constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+  //                                   sf::Vector2f(constant::blockSize, constant::blockSize)
+  //                                 ));
+  //           --powerUpsToAdd;
+  //         }
+  //         else if(random == 3)
+  //         {
+  //           horizontalDamagePowerUps.push_back(
+  //             HorizontalDamagePowerUp(ResourceManager::horizontalDamage,
+  //                            sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+  //                                         constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+  //                                         sf::Vector2f(constant::blockSize, constant::blockSize)
+  //                                       ));
+  //           --powerUpsToAdd;
+  //         }
+  //         else
+  //         {
+  //           flipperPowerUps.push_back(
+  //             FlipperPowerUp(ResourceManager::flipper,
+  //                            sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+  //                                         constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+  //                                         sf::Vector2f(constant::blockSize, constant::blockSize)
+  //                                       ));
+  //           --powerUpsToAdd;
+  //         }
+  //       }
+  //       else
+  //       {
+  //         extraBallPowerUps.push_back(
+  //           ExtraBallPowerUp(ResourceManager::extraBall,
+  //                          sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+  //                                       constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+  //                                       sf::Vector2f(constant::blockSize, constant::blockSize)
+  //                                     ));
+  //         --powerUpsToAdd;
+  //       }
+  //     }
+  //   }
+  //   else if(blocksToAdd > 0)
+  //   {
+  //     blocks.push_back(Block(sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+  //                                         constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+  //                                         sf::Vector2f(constant::blockSize, constant::blockSize),
+  //   												 ResourceManager::arial,
+  //   												 25,
+  //                            level));
+  //     --blocksToAdd;
+  //   }
+  // }
 
 
   // for( auto& block : blocks )
@@ -166,14 +171,16 @@ void BlockGenerator::generateRow(int level)
 
 void BlockGenerator::update(BallGenerator& generator, bool nextLevelSignal, int level)
 {
+  std::cout << "xtrballpowup update...";
   for( auto& extraBallPowerUp : extraBallPowerUps )
   {
     extraBallPowerUp.update(generator);
   }
+  std::cout << " done\n";
 
   //this algorithm ensures that vector doesn't get displaced
   //when elements are deleted, in which case crashes may happen
-
+  std::cout << "xtrballpowup deletion...";
   bool notAnyObjectDeleted{ false };
   while(!notAnyObjectDeleted)
   {
@@ -188,7 +195,7 @@ void BlockGenerator::update(BallGenerator& generator, bool nextLevelSignal, int 
       }
     }
   }
-
+  std::cout << " done\n";
 
   // for(std::size_t iii{ 0 }; iii < extraBallPowerUps.size(); ++iii)
 	// {
@@ -198,6 +205,7 @@ void BlockGenerator::update(BallGenerator& generator, bool nextLevelSignal, int 
   //   }
 	// }
 
+  std::cout << "block update...";
   for( auto& block : blocks )
   {
     for( auto& ball : generator.getBalls() )
@@ -205,7 +213,9 @@ void BlockGenerator::update(BallGenerator& generator, bool nextLevelSignal, int 
       block.update(ball);
     }
   }
+  std::cout << " done\n";
 
+  std::cout << "block deletion...";
   notAnyObjectDeleted = false;
   while(!notAnyObjectDeleted)
   {
@@ -220,24 +230,32 @@ void BlockGenerator::update(BallGenerator& generator, bool nextLevelSignal, int 
       }
     }
   }
+  std::cout << " done\n";
 
+  std::cout << "verdampowup update...";
   for( auto& verticalDamagePowerUp : verticalDamagePowerUps )
   {
     verticalDamagePowerUp.update(generator, blocks);
   }
+  std::cout << " done\n";
 
+  std::cout << "hordampowup update...";
   for( auto& horizontalDamagePowerUp : horizontalDamagePowerUps )
   {
     horizontalDamagePowerUp.update(generator, blocks);
   }
+  std::cout << " done\n";
 
+  std::cout << "flippowup update...";
   for( auto& flipperPowerUp : flipperPowerUps )
   {
     flipperPowerUp.update(generator);
   }
+  std::cout << " done\n";
 
   if(nextLevelSignal)
   {
+    std::cout << "verdampowup deletion...";
     notAnyObjectDeleted = false;
     while(!notAnyObjectDeleted)
     {
@@ -252,7 +270,9 @@ void BlockGenerator::update(BallGenerator& generator, bool nextLevelSignal, int 
         }
       }
     }
+    std::cout << " done\n";
 
+    std::cout << "hordampowup deletion...";
     notAnyObjectDeleted = false;
     while(!notAnyObjectDeleted)
     {
@@ -267,7 +287,9 @@ void BlockGenerator::update(BallGenerator& generator, bool nextLevelSignal, int 
         }
       }
     }
+    std::cout << " done\n";
 
+    std::cout << "flippowup deletion...";
     notAnyObjectDeleted = false;
     while(!notAnyObjectDeleted)
     {
@@ -282,8 +304,11 @@ void BlockGenerator::update(BallGenerator& generator, bool nextLevelSignal, int 
         }
       }
     }
+    std::cout << " done\n";
 
+    std::cout << "generating row...";
     generateRow(level);
+    std::cout << " done\n";
   }
 }
 
