@@ -51,6 +51,141 @@ void BlockGenerator::generateRow(int level)
       									 25,
                          level));
 
+
+  int blocksToAdd{ Random::getRandomInt(1, constant::blocksInRow - 1) };
+  bool extraBallPowerUpAdded{ false };
+  bool otherPowerUpAdded{ true };
+  if(blocksToAdd < constant::blocksInRow - 1 && Random::drawStraws(4))
+  {
+    otherPowerUpAdded = false;
+  }
+
+  for(int iii{ 0 }; iii < constant::blocksInRow; ++iii)
+  {
+    if(blocksToAdd + !extraBallPowerUpAdded + !otherPowerUpAdded == constant::blocksInRow - iii)
+    {
+      if(!extraBallPowerUpAdded && !otherPowerUpAdded)
+      {
+        blocks.push_back(Block(sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+                                            constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                               sf::Vector2f(constant::blockSize, constant::blockSize),
+            									 ResourceManager::arial,
+            									 25,
+                               level));
+        --blocksToAdd;
+      }
+      else if(Random::drawStraws(3))
+      {
+        blocks.push_back(Block(sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+                                            constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                               sf::Vector2f(constant::blockSize, constant::blockSize),
+            									 ResourceManager::arial,
+            									 25,
+                               level));
+        --blocksToAdd;
+      }
+      else if(!extraBallPowerUpAdded && Random::drawStraws(3))
+      {
+        extraBallPowerUps.push_back(
+          ExtraBallPowerUp(ResourceManager::extraBall,
+                           sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+                                        constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                           sf::Vector2f(constant::blockSize, constant::blockSize)
+                          ));
+        extraBallPowerUpAdded = true;
+      }
+      else if(!otherPowerUpAdded)
+      {
+        if(Random::drawStraws(3))
+        {
+          verticalDamagePowerUps.push_back(
+            VerticalDamagePowerUp(ResourceManager::verticalDamage,
+                                  sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+                                               constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                                  sf::Vector2f(constant::blockSize, constant::blockSize)
+                                 ));
+          otherPowerUpAdded = true;
+        }
+        else if(Random::drawStraws(3))
+        {
+          horizontalDamagePowerUps.push_back(
+            HorizontalDamagePowerUp(ResourceManager::horizontalDamage,
+                                    sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+                                                 constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                                    sf::Vector2f(constant::blockSize, constant::blockSize)
+                                   ));
+          otherPowerUpAdded = true;
+        }
+        else
+        {
+          flipperPowerUps.push_back(
+          FlipperPowerUp(ResourceManager::flipper,
+                         sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+                                      constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                         sf::Vector2f(constant::blockSize, constant::blockSize)
+                                    ));
+          otherPowerUpAdded = true;
+        }
+      }
+    }
+    else
+    {
+      if(Random::drawStraws(4))
+      {
+        blocks.push_back(Block(sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+                                            constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                               sf::Vector2f(constant::blockSize, constant::blockSize),
+            									 ResourceManager::arial,
+            									 25,
+                               level));
+        --blocksToAdd;
+      }
+      else if(!extraBallPowerUpAdded && Random::drawStraws(4))
+      {
+        extraBallPowerUps.push_back(
+          ExtraBallPowerUp(ResourceManager::extraBall,
+                           sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+                                        constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                           sf::Vector2f(constant::blockSize, constant::blockSize)
+                          ));
+        extraBallPowerUpAdded = true;
+      }
+      else if(!otherPowerUpAdded && Random::drawStraws(4))
+      {
+        if(Random::drawStraws(3))
+        {
+          verticalDamagePowerUps.push_back(
+            VerticalDamagePowerUp(ResourceManager::verticalDamage,
+                                  sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+                                               constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                                  sf::Vector2f(constant::blockSize, constant::blockSize)
+                                 ));
+          otherPowerUpAdded = true;
+        }
+        else if(Random::drawStraws(3))
+        {
+          horizontalDamagePowerUps.push_back(
+            HorizontalDamagePowerUp(ResourceManager::horizontalDamage,
+                                    sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+                                                 constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                                    sf::Vector2f(constant::blockSize, constant::blockSize)
+                                   ));
+          otherPowerUpAdded = true;
+        }
+        else
+        {
+          flipperPowerUps.push_back(
+          FlipperPowerUp(ResourceManager::flipper,
+                         sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+                                      constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                         sf::Vector2f(constant::blockSize, constant::blockSize)
+                                   ));
+          otherPowerUpAdded = true;
+        }
+      }
+    }
+  }
+
   // int blocksToAdd{ Random::getRandomInt(1, constant::blocksInRow - 1) };
   // int powerUpsToAdd{ Random::getRandomInt(1, constant::blocksInRow - 1 - blocksToAdd) };
   //
