@@ -15,8 +15,8 @@ BallGenerator::BallGenerator(sf::Vector2f position, double maxCooldown)
     cooldown{ 0.0 },
     maxCooldown{ maxCooldown }
 {
-  aimingLine.push_back(sf::Vertex(position, sf::Color::Red));
-  aimingLine.push_back(sf::Vertex(position, sf::Color::Red));
+  // aimingLine.push_back(sf::Vertex(position, sf::Color::Red));
+  // aimingLine.push_back(sf::Vertex(position, sf::Color::Red));
 
   ballsNumberText.setPosition(position + sf::Vector2f(-5, -50));
 }
@@ -27,10 +27,11 @@ void BallGenerator::update(double elapsedTime, sf::Vector2i mousePosition, bool 
   if(phase == Phase::Aiming)
   {
     nextLevelSignal = false;
-    aimingLine.at(0).position = position;
+    // aimingLine.at(0).position = position;
     //SFML won't let to assign Vector2f to Vector2i
-    aimingLine.at(1).position.x = mousePosition.x;
-    aimingLine.at(1).position.y = mousePosition.y;
+    // aimingLine.at(1).position.x = mousePosition.x;
+    // aimingLine.at(1).position.y = mousePosition.y;
+    arrow.update(position, mousePosition);
 
     if(clicked)
     {
@@ -64,7 +65,8 @@ void BallGenerator::update(double elapsedTime, sf::Vector2i mousePosition, bool 
 
 void BallGenerator::draw(sf::RenderWindow& window)
 {
-  window.draw(&aimingLine.at(0), aimingLine.size(), sf::Lines);
+  // window.draw(&aimingLine.at(0), aimingLine.size(), sf::Lines);
+  arrow.draw(window);
 
   for( auto& ball : balls )
 	{

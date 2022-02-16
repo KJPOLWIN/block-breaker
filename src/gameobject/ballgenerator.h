@@ -2,6 +2,7 @@
 #define BALLGENERATOR_H
 
   #include "ball.h"
+  #include "arrow.h"
   #include "guitext.h"
   #include "resourcemanager.h"
   #include <SFML/Graphics.hpp>
@@ -49,7 +50,7 @@
     int maxBallsNumber{ 1 };
     int ballsNumber{ 1 };
 
-    std::vector<sf::Vertex> aimingLine{  };
+    Arrow arrow;
     Phase phase{ Phase::Aiming };
 
     bool nextLevelSignal{ false };
@@ -57,7 +58,7 @@
     guiText ballsNumberText{
                              ResourceManager::arial,
                              "",
-                             sf::Color::Red,
+                             constant::textColor,
                              30,
                              sf::Vector2f()
                            };

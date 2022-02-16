@@ -10,6 +10,7 @@
     inline const sf::Color ballColor{ 229, 192, 26 };
     inline const sf::Color textColor{ 234, 205, 72 };
     inline const sf::Color wallColor{ 43, 12, 108 };
+    inline const sf::Color arrowColor{ 229, 210, 125 };
     inline const sf::Color backgroundColor{ 3, 7, 25 };
 
 		//Game consts

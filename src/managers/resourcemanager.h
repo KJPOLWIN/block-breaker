@@ -22,6 +22,10 @@
 			static sf::Texture horizontalDamageTexture;
 			static sf::Texture flipperTexture;
 
+      //Arrow
+      static sf::Texture arrowHeadTexture;
+      static sf::Texture arrowBaseTexture;
+
 			//SPRITES
 			//	Buttons
 			static AnimatedSprite startButton;
@@ -31,6 +35,10 @@
 			static AnimatedSprite verticalDamage;
 			static AnimatedSprite horizontalDamage;
 			static AnimatedSprite flipper;
+
+      //Arrow
+      static AnimatedSprite arrowHead;
+      static AnimatedSprite arrowBase;
 
 		private:
 			ResourceManager() {  }
