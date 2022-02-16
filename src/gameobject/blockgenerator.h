@@ -34,6 +34,10 @@
       std::vector<HorizontalDamagePowerUp> horizontalDamagePowerUps{  };
       std::vector<FlipperPowerUp> flipperPowerUps{  };
 
+      void addBlock(int iii, int level);
+      void addExtraBallPowerUp(int iii, int level);
+      void addOtherPowerUp(int iii, int level);
+
   };
 
 #endif
