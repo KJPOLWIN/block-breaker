@@ -118,30 +118,27 @@ void BlockGenerator::update(BallGenerator& generator, bool nextLevelSignal, int 
     extraBallPowerUp.update(generator);
   }
 
-  //this algorithm ensures that vector doesn't get displaced
-  //when elements are deleted, in which case crashes may happen;
-  bool notAnyObjectDeleted{ false };
-  while(!notAnyObjectDeleted)
-  {
-    notAnyObjectDeleted = true;
-    for(int iii{ 0 }; iii < extraBallPowerUps.size(); ++iii)
-    {
-      if(!extraBallPowerUps.at(iii).isAlive())
-      {
-        extraBallPowerUps.erase(extraBallPowerUps.begin() + iii);
-        notAnyObjectDeleted = false;
-        break;
-      }
-    }
-  }
-
-  // for(std::size_t iii{ 0 }; iii < extraBallPowerUps.size(); ++iii)
-	// {
-  //   if(!extraBallPowerUps.at(iii).isAlive())
+  // while(!notAnyObjectDeleted)
+  // {
+  //   notAnyObjectDeleted = true;
+  //   for(int iii{ 0 }; iii < extraBallPowerUps.size(); ++iii)
   //   {
-  //     extraBallPowerUps.erase(extraBallPowerUps.begin() + iii);
+  //     if(!extraBallPowerUps.at(iii).isAlive())
+  //     {
+  //       extraBallPowerUps.erase(extraBallPowerUps.begin() + iii);
+  //       notAnyObjectDeleted = false;
+  //       break;
+  //     }
   //   }
-	// }
+  // }
+
+  for(std::size_t iii{ 0 }; iii < extraBallPowerUps.size(); ++iii)
+	{
+    if(!extraBallPowerUps.at(iii).isAlive())
+    {
+      extraBallPowerUps.erase(extraBallPowerUps.begin() + iii);
+    }
+	}
 
   for( auto& block : blocks )
   {
@@ -151,20 +148,13 @@ void BlockGenerator::update(BallGenerator& generator, bool nextLevelSignal, int 
     }
   }
 
-  notAnyObjectDeleted = false;
-  while(!notAnyObjectDeleted)
-  {
-    notAnyObjectDeleted = true;
-    for(int iii{ 0 }; iii < blocks.size(); ++iii)
+  for(std::size_t iii{ 0 }; iii < blocks.size(); ++iii)
+	{
+    if(!blocks.at(iii).isAlive())
     {
-      if(!blocks.at(iii).isAlive())
-      {
-        blocks.erase(blocks.begin() + iii);
-        notAnyObjectDeleted = false;
-        break;
-      }
+      blocks.erase(blocks.begin() + iii);
     }
-  }
+	}
 
   for( auto& verticalDamagePowerUp : verticalDamagePowerUps )
   {
@@ -183,50 +173,29 @@ void BlockGenerator::update(BallGenerator& generator, bool nextLevelSignal, int 
 
   if(nextLevelSignal)
   {
-    notAnyObjectDeleted = false;
-    while(!notAnyObjectDeleted)
-    {
-      notAnyObjectDeleted = true;
-      for(int iii{ 0 }; iii < verticalDamagePowerUps.size(); ++iii)
+    for(std::size_t iii{ 0 }; iii < verticalDamagePowerUps.size(); ++iii)
+  	{
+      if(!verticalDamagePowerUps.at(iii).isAlive())
       {
-        if(!verticalDamagePowerUps.at(iii).isAlive())
-        {
-          verticalDamagePowerUps.erase(verticalDamagePowerUps.begin() + iii);
-          notAnyObjectDeleted = false;
-          break;
-        }
+        verticalDamagePowerUps.erase(verticalDamagePowerUps.begin() + iii);
       }
-    }
+  	}
 
-    notAnyObjectDeleted = false;
-    while(!notAnyObjectDeleted)
-    {
-      notAnyObjectDeleted = true;
-      for(int iii{ 0 }; iii < horizontalDamagePowerUps.size(); ++iii)
+    for(std::size_t iii{ 0 }; iii < horizontalDamagePowerUps.size(); ++iii)
+  	{
+      if(!horizontalDamagePowerUps.at(iii).isAlive())
       {
-        if(!horizontalDamagePowerUps.at(iii).isAlive())
-        {
-          horizontalDamagePowerUps.erase(horizontalDamagePowerUps.begin() + iii);
-          notAnyObjectDeleted = false;
-          break;
-        }
+        horizontalDamagePowerUps.erase(horizontalDamagePowerUps.begin() + iii);
       }
-    }
+  	}
 
-    notAnyObjectDeleted = false;
-    while(!notAnyObjectDeleted)
-    {
-      notAnyObjectDeleted = true;
-      for(int iii{ 0 }; iii < flipperPowerUps.size(); ++iii)
+    for(std::size_t iii{ 0 }; iii < flipperPowerUps.size(); ++iii)
+  	{
+      if(!flipperPowerUps.at(iii).isAlive())
       {
-        if(!flipperPowerUps.at(iii).isAlive())
-        {
-          flipperPowerUps.erase(flipperPowerUps.begin() + iii);
-          notAnyObjectDeleted = false;
-          break;
-        }
+        flipperPowerUps.erase(flipperPowerUps.begin() + iii);
       }
-    }
+  	}
 
     generateRow(level);
   }
