@@ -46,11 +46,24 @@ void BlockGenerator::generateRow(int level)
 
   int blocksToAdd{ Random::getRandomInt(1, constant::blocksInRow - 1) };
   bool extraBallPowerUpAdded{ false };
+
   bool otherPowerUpAdded{ true };
-  if(blocksToAdd < constant::blocksInRow - 1 && level % 3 == 0)
+  if(level % 3 == 0)
   {
+    if(blocksToAdd == constant::blocksInRow - 1)
+    {
+        --blocksToAdd;
+    }
+
     otherPowerUpAdded = false;
   }
+
+  int blockMultiplier{ 1 };
+  if(level % 5 == 0)
+  {
+    blockMultiplier = 2;
+  }
+
 
   for(int iii{ 0 }; iii < constant::blocksInRow; ++iii)
   {
@@ -58,22 +71,22 @@ void BlockGenerator::generateRow(int level)
     {
       if(blocksToAdd > 0 && Random::drawStraws(3))
       {
-        addBlock(iii, level);
+        addBlock(iii, level * blockMultiplier);
         --blocksToAdd;
       }
       else if(!extraBallPowerUpAdded)
       {
-        addExtraBallPowerUp(iii, level);
+        addExtraBallPowerUp(iii);
         extraBallPowerUpAdded = true;
       }
       else if(!otherPowerUpAdded)
       {
-        addOtherPowerUp(iii, level);
+        addOtherPowerUp(iii);
         otherPowerUpAdded = true;
       }
       else if(blocksToAdd > 0)
       {
-        addBlock(iii, level);
+        addBlock(iii, level * blockMultiplier);
         --blocksToAdd;
       }
     }
@@ -81,17 +94,17 @@ void BlockGenerator::generateRow(int level)
     {
       if(blocksToAdd > 0 && Random::drawStraws(3))
       {
-        addBlock(iii, level);
+        addBlock(iii, level * blockMultiplier);
         --blocksToAdd;
       }
       else if(!extraBallPowerUpAdded && Random::drawStraws(3))
       {
-        addExtraBallPowerUp(iii, level);
+        addExtraBallPowerUp(iii);
         extraBallPowerUpAdded = true;
       }
       else if(!otherPowerUpAdded && Random::drawStraws(3))
       {
-        addOtherPowerUp(iii, level);
+        addOtherPowerUp(iii);
         otherPowerUpAdded = true;
       }
     }
@@ -285,7 +298,7 @@ void BlockGenerator::addBlock(int iii, int level)
                          level));
 }
 
-void BlockGenerator::addExtraBallPowerUp(int iii, int level)
+void BlockGenerator::addExtraBallPowerUp(int iii)
 {
   extraBallPowerUps.push_back(
     ExtraBallPowerUp(ResourceManager::extraBall,
@@ -295,33 +308,37 @@ void BlockGenerator::addExtraBallPowerUp(int iii, int level)
                     ));
 }
 
-void BlockGenerator::addOtherPowerUp(int iii, int level)
+void BlockGenerator::addOtherPowerUp(int iii)
 {
-  if(Random::drawStraws(3))
+  int type = Random::getRandomInt(1, 3);
+
+  switch(type)
   {
-    verticalDamagePowerUps.push_back(
-      VerticalDamagePowerUp(ResourceManager::verticalDamage,
-                            sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
-                                         constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
-                            sf::Vector2f(constant::blockSize, constant::blockSize)
-                           ));
-  }
-  else if(Random::drawStraws(3))
-  {
-    horizontalDamagePowerUps.push_back(
-      HorizontalDamagePowerUp(ResourceManager::horizontalDamage,
+    case 1:
+      verticalDamagePowerUps.push_back(
+        VerticalDamagePowerUp(ResourceManager::verticalDamage,
                               sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
                                            constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
                               sf::Vector2f(constant::blockSize, constant::blockSize)
                              ));
-  }
-  else
-  {
-    flipperPowerUps.push_back(
-    FlipperPowerUp(ResourceManager::flipper,
-                   sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
-                                constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
-                   sf::Vector2f(constant::blockSize, constant::blockSize)
-                             ));
+    break;
+
+    case 2:
+      horizontalDamagePowerUps.push_back(
+        HorizontalDamagePowerUp(ResourceManager::horizontalDamage,
+                                sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+                                             constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                                sf::Vector2f(constant::blockSize, constant::blockSize)
+                                ));
+    break;
+
+    case 3:
+      flipperPowerUps.push_back(
+        FlipperPowerUp(ResourceManager::flipper,
+                       sf::Vector2f(constant::wallThickness + (iii + 1) * constant::gapSize + iii * constant::blockSize,
+                                    constant::wallThickness + 2 * constant::gapSize + constant::blockSize),
+                       sf::Vector2f(constant::blockSize, constant::blockSize)
+                      ));
+    break;
   }
 }
