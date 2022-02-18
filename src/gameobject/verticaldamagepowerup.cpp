@@ -10,7 +10,9 @@ VerticalDamagePowerUp::VerticalDamagePowerUp(AnimatedSprite sprite, sf::Vector2f
     gridPosition{ sf::Vector2i((position.x - constant::wallThickness - constant::gapSize) / (constant::blockSize + constant::gapSize),
                     (position.y - constant::wallThickness - constant::gapSize) / (constant::blockSize + constant::gapSize)) }
 {
-
+  rayEffect.setOrigin(sf::Vector2f(rayEffect.getSize().x * 0.5, rayEffect.getSize().y * 0.5));
+  rayEffect.setPosition(this->getPosition() + sf::Vector2f(50, 0));
+  rayEffect.setFillColor(constant::rayColor);
 }
 
 void VerticalDamagePowerUp::update(BallGenerator& generator, std::vector<Block>& blocks)
@@ -28,6 +30,7 @@ void VerticalDamagePowerUp::update(BallGenerator& generator, std::vector<Block>&
   if(collidedBalls > oldCollidedBalls)
   {
     alive = false;
+    active = true;
     for( auto& block : blocks )
     {
       if(block.getColumn() == gridPosition.x)
@@ -36,8 +39,18 @@ void VerticalDamagePowerUp::update(BallGenerator& generator, std::vector<Block>&
       }
     }
   }
+  else
+  {
+    active = false;
+  }
 
   oldCollidedBalls = collidedBalls;
+}
+
+void VerticalDamagePowerUp::draw(sf::RenderWindow& targetWindow)
+{
+  PowerUp::draw(targetWindow);
+  if(active) targetWindow.draw(rayEffect);
 }
 
 void VerticalDamagePowerUp::move()

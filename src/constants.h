@@ -12,6 +12,7 @@
     inline const sf::Color wallColor{ 43, 12, 108 };
     inline const sf::Color arrowColor{ 229, 210, 125 };
     inline const sf::Color backgroundColor{ 3, 7, 25 };
+    inline const sf::Color rayColor{ 103, 126, 229 };
 
 		//Game consts
 		inline constexpr float ballRadius{ 15.0f };
