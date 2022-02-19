@@ -56,7 +56,7 @@
 			guiText levelText{
 	                       ResourceManager::arial,
 	                       "",
-	                       sf::Color::Red,
+	                       constant::textColor,
 	                       50,
 	                       sf::Vector2f(constant::windowWidth - 200.f, 50.0f)
 	                     };

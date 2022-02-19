@@ -56,6 +56,6 @@ void HorizontalDamagePowerUp::draw(sf::RenderWindow& targetWindow)
 void HorizontalDamagePowerUp::move()
 {
   ++gridPosition.y;
-  rayEffect.setPosition(this->getPosition() + sf::Vector2f(0, 50));
   PowerUp::move();
+  rayEffect.setPosition(this->getPosition() + sf::Vector2f(0, 50));
 }
