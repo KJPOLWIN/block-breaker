@@ -53,6 +53,16 @@ void BallGenerator::update(double elapsedTime, sf::Vector2i mousePosition, bool 
   }
 
   ballsNumberText.update(std::to_string(ballsNumber));
+  
+  for(std::size_t iii{ 0 }; iii < balls.size(); ++iii)
+  {
+    //Ball shouldn't escape screen from the bottom, because ball deletor is there
+    if(balls.at(iii).getPosition().x < 0 || balls.at(iii).getPosition().x > constant::windowHeight
+    || balls.at(iii).getPosition().y < 0)
+    {
+      balls.erase(balls.begin() + iii);
+    }
+  }
 }
 
 void BallGenerator::draw(sf::RenderWindow& window)

@@ -39,16 +39,11 @@
 
 			std::vector<Wall> walls{  };
 			BlockGenerator blockGenerator{  };
-      // std::vector<Block> blocksDebug{  };
-      // std::vector<ExtraBallPowerUp> xtrBallPowupsDebug{  };
-      // std::vector<HorizontalDamagePowerUp> horDamPowupsDebug{  };
-      // std::vector<VerticalDamagePowerUp> verDamPowupsDebug{  };
-      // std::vector<FlipperPowerUp> flipDamPowupsDebug{  };
 
 			BallDeletor deletor{
 													 sf::Vector2f(0, constant::windowHeight),
                            sf::Vector2f(constant::windowWidth,
-														 						constant::wallThickness)
+														 						500)
 												 };
 
 			int level{ 1 };
