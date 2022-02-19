@@ -2,11 +2,17 @@
 #define CONSTANTS_H
 
 	#include <SFML/Graphics.hpp>
+  #include <array>
 
 	namespace constant
 	{
     //Color consts
-    inline const sf::Color blockColor{ 26, 63, 229 };
+    inline const std::array<sf::Color, 3> blockColors{
+                                          sf::Color( 26, 63,  229 ),
+                                          sf::Color( 78, 106, 229 ),
+                                          sf::Color( 47, 80,  229 )
+                                        };
+
     inline const sf::Color ballColor{ 229, 192, 26 };
     inline const sf::Color textColor{ 234, 205, 72 };
     inline const sf::Color wallColor{ 43, 12, 108 };
@@ -23,7 +29,7 @@
 		inline constexpr int blocksInRow{ 7 };
 		inline constexpr int blocksInColumn{ 8 };  	//Number of blocks + 1 block-size gap on the top
 		inline constexpr double blockSize{ 100.0 };
-		inline constexpr double gapSize{ 5.0 };
+		inline constexpr double gapSize{ 0.0 };
 
 		//Window consts
 		inline constexpr double windowWidth{ 2 * wallThickness

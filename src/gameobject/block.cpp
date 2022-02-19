@@ -2,6 +2,7 @@
 #include "constants.h"
 #include "ball.h"
 #include <SFML/Graphics.hpp>
+#include <array>
 
     #include <iostream>
 
@@ -14,7 +15,10 @@ Block::Block(sf::Vector2f position, sf::Vector2f size, sf::Font &textFont,
     gridPosition{ sf::Vector2i((position.x - constant::wallThickness - constant::gapSize) / (constant::blockSize + constant::gapSize),
                            (position.y - constant::wallThickness - constant::gapSize) / (constant::blockSize + constant::gapSize)) }
 {
-  this->setColor(constant::blockColor);
+  static int color{ 0 };
+  this->setColor(constant::blockColors.at(color));
+  ++color;
+  if(color >= 3) color -= 3;
 }
 
 void Block::update(Ball& ball)
